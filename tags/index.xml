@@ -38,5 +38,32 @@
       <description></description>
     </item>
     
+    <item>
+      <title>deeplearning</title>
+      <link>https://kungtalon.github.io/tags/deeplearning/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/deeplearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machinelearning</title>
+      <link>https://kungtalon.github.io/tags/machinelearning/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/machinelearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>NLP</title>
+      <link>https://kungtalon.github.io/tags/nlp/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/nlp/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

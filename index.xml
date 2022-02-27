@@ -20,5 +20,14 @@
       <description>This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems.</description>
     </item>
     
+    <item>
+      <title>A Survey on Logic Reasoning in Text Mining</title>
+      <link>https://kungtalon.github.io/post/summer/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/post/summer/</guid>
+      <description>A short review of some recent researches on logic reasoning.</description>
+    </item>
+    
   </channel>
 </rss>
