@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>A Survey on Logic Reasoning in Text Mining - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="A short review of some recent researches on logic reasoning." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/logic-reasoning/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.2e81bbed97b8b282c1aeb57488cc71c8d8c8ec559f3931531bd396bf31e0d4dd.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="A Survey on Logic Reasoning in Text Mining" />
+<meta property="og:description" content="A short review of some recent researches on logic reasoning." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/logic-reasoning/" />
+<meta property="article:published_time" content="2020-03-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-04T00:00:00+00:00" />
+<meta itemprop="name" content="A Survey on Logic Reasoning in Text Mining">
+<meta itemprop="description" content="A short review of some recent researches on logic reasoning.">
+<meta itemprop="datePublished" content="2020-03-04T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-03-04T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="2187">
+
+
+
+<meta itemprop="keywords" content="machinelearning,deeplearning,NLP," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Survey on Logic Reasoning in Text Mining"/>
+<meta name="twitter:description" content="A short review of some recent researches on logic reasoning."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">A Survey on Logic Reasoning in Text Mining</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-03-04 </span>
+        <div class="post-category">
+            <a href="/categories/machinelearning/"> machinelearning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#a-short-introduction-to-probabilistic-soft-logic">A Short Introduction to Probabilistic Soft Logic</a>
+          <ul>
+            <li><a href="#semantics">Semantics</a></li>
+            <li><a href="#inference--learning">Inference &amp; Learning</a></li>
+          </ul>
+        </li>
+        <li><a href="#harnessing-deep-neural-networks-with-logic-rules">Harnessing Deep Neural Networks with Logic Rules</a></li>
+        <li><a href="#deep-compositional-question-answering-with-neural-module-networks">Deep Compositional Question Answering with Neural Module Networks</a></li>
+        <li><a href="#the-neuro-symbolic-concept-learner">The Neuro-Symbolic Concept Learner</a>
+          <ul>
+            <li><a href="#visual-perception">Visual Perception:</a></li>
+            <li><a href="#concept-quantization">Concept Quantization</a></li>
+            <li><a href="#semantic-parser">Semantic Parser</a></li>
+            <li><a href="#program-execution">Program Execution</a></li>
+            <li><a href="#optimization">Optimization</a></li>
+            <li><a href="#experiments">Experiments</a></li>
+          </ul>
+        </li>
+        <li><a href="#neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</a></li>
+        <li><a href="#dl2-training-and-querying-neural-networks-with-logic">DL2: Training and Querying Neural Networks with Logic</a>
+          <ul>
+            <li><a href="#constrained-neural-network">Constrained Neural Network</a></li>
+            <li><a href="#quering-networks">Quering Networks</a></li>
+            <li><a href="#training">Training</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="a-short-introduction-to-probabilistic-soft-logic">A Short Introduction to Probabilistic Soft Logic</h2>
+<h3 id="semantics">Semantics</h3>
+<p>Rule: Body $\rightarrow$ Head  $r = r_{body} \rightarrow r_{head} = \neg r_{body} \lor r_{head}$</p>
+<p><strong>Interpretation</strong>: A mapping $I: \ell \rightarrow [0,1]^{n}$, which provides a set of assignments to atoms, whose probabilities can then be determined. In mathematical logic, an <strong>assignment</strong> is mapping entities from domain $D$ to variables in a proposition and by assignment we get a boolean value of the proposition.  A <strong>grouding</strong> of a rule represents an instantiation of all variables in the rule after assignment.</p>
+<p>Given interpretation $I$, the logical operators are defined:
+$$
+\begin{aligned}
+\ell_{1} \tilde{\wedge} \ell_{2}&amp;=\max \left\{0, I\left(\ell_{1}\right)+I\left(\ell_{2}\right)-1\right\} \\<br>
+\ell_{1} \tilde{\vee} \ell_{2}&amp;=\min \left\{I\left(\ell_{1}\right)+I\left(\ell_{2}\right), 1\right\} \\<br>
+\tilde\neg l_{1}&amp;=1-I\left(\ell_{1}\right)
+\end{aligned}
+$$
+then, probabilities of every rule can be calculated corresponding to the interpretation given.</p>
+<p>Given $I$, for each rule we define a <em>distance to satisfaction</em>
+$$
+d_r(I) = 1 - I(r) = \max{0, I(r_{body}) - I(r_{head})}
+$$</p>
+<p>The probability is defined as:
+$$
+f(I)=\frac{1}{Z} \exp \left[-\sum_{r \in R} \lambda_{r}\left(d_{r}(I)\right)^{p}\right] \quad ; \quad Z=\int_{I} \exp \left[-\sum_{r \in R} \lambda_{r}\left(d_{r}(I)\right)^{p}\right]
+$$
+$p=1,2$, and $p=1$ favors strict satisfaction.</p>
+<p>When $I$ violates any hard constraint (background knowledge), set $f(I)=0$</p>
+<h3 id="inference--learning">Inference &amp; Learning</h3>
+<ol>
+<li>Given interpretation of some propositions as evidence, find the most likely interpretation for the rest.</li>
+<li>Computie marginal distributions</li>
+</ol>
+<p>The space of interpretations with non-zero density forms a convex polytope.</p>
+<p><strong>MPE Inference</strong> Optimization method: Second-Order Cone Program (SOCP)  or consensus optimization</p>
+<p><strong>Computing Marginal Distributions</strong> For an atom $l_i$, computing $P(l\leq I(l_i)\leq u)$ corresponds to computing the volume of a slice of the convex polytope of non-zero density interpretations. Use <u>hit-and-run Markov chain Monte Carlo</u> to sample points in polytope and approximate the distribution.</p>
+<p><strong>Weight Learning</strong>
+$$
+\frac{\partial}{\partial \lambda_{i}} \log f(I)=-\sum_{r \in R_{i}}\left(d_{r}(I)\right)^{p}+\mathbb{E}\left[\sum_{r \in R_{i}}\left(d_{r}(I)\right)^{p}\right]
+$$
+usually $\sum_{r \in R_{i}}\left(d_{r}\left(I^{\star}\right)\right)^{p}$ is used to approximate the expectation, where $I^*$ is the most probable interpretation <u>given the current weights</u> (iteratively update the weights).</p>
+<p>Note: Here $r \in R_i$ means for all <strong>groundings</strong> of rule $R_i$, and they share the same weight $\lambda_i$.</p>
+<p>From <em>Probabilistic Similarity Logic</em>, a procedure of MAP inference: ($I(\mathbf x)$ are interpretation of evidence propositions, $\mathbf y$ are propositions with unknown values, <em>activated</em> means the value is lower than 1)</p>
+<p><img src="content/pics/image-20200214212917837.png" alt="image-20200214212917837"></p>
+<p>By introducing an auxiliary variable $v_a$ for each atom a, we get a value for each rule r, denoted as $v_r$. Use the inequality constraint $v_r \geq d_r(I_{i-1})$ and hard constraints to construct the SOCP with the objective function $\sum_{r\in R}\lambda_r(d_r(I))^p$.</p>
+<h2 id="harnessing-deep-neural-networks-with-logic-rules">Harnessing Deep Neural Networks with Logic Rules</h2>
+<p><img src="content/pics/image-20200215165202859.png" alt="image-20200215165202859"></p>
+<p>$q(y|x)$ is a projection of the true distribution $p(y|x)$ to the subspace constrained by the rules. The loss of student network is:</p>
+<p>$$
+\pi \ell\left(\boldsymbol{s}<em>{n}^{(t)}, \boldsymbol{\sigma}</em>{\theta}\left(\boldsymbol{x}_{n}\right)\right)
+$$</p>
+<p>where $\boldsymbol{s}_{n}^{(t)}$ is the soft prediction of q on $\boldsymbol{x}_n$, $\pi$ is the weight balancing between the task of emulating the teacher network and the task of predicting the true labels.</p>
+<p>Compared with training a projected network and other models, the procedure has advantages:</p>
+<ol>
+<li>Better performance.</li>
+<li>The student network is suitable for predicting new examples in place of rule assignment.</li>
+<li>The two loss terms can be handled separately. Unlabeled data can be added to the second term.</li>
+</ol>
+<p><strong>How to learn the projected distribution</strong>:
+$$\begin{array}{rl}
+{\min \limits_{q, \xi \geq 0}} &amp; {\mathrm{KL}\left(q(\boldsymbol{Y} | \boldsymbol{X}) | p_{\theta}(\boldsymbol{Y} | \boldsymbol{X})\right)+C \sum_{l, g_{l}} \xi_{l, g_{l}}} \\<br>
+{\text { s.t. }} &amp; {\lambda_{l}\left(1-\mathbb{E}_{q}\left[r_{l, g_l}(\boldsymbol{X}, \boldsymbol{Y})\right]\right) \leq \xi_{l, g_{l}}} \\<br>
+{} &amp; {g_{l}=1, \ldots, G_{l}, l=1, \ldots, L}
+\end{array}$$
+$r_{l,g_l}$ is the $g_l$-th grounding of the $l$-th rule. By variation, we have a closed form solution:
+$$
+q^{*}(\boldsymbol{Y} | \boldsymbol{X}) \propto p_{\theta}(\boldsymbol{Y} | \boldsymbol{X}) \exp \left\{ -\sum_{l, g_{l}} C \lambda_{l}\left(1-r_{l, g_{l}}(\boldsymbol{X}, \boldsymbol{Y})\right)\right\}
+$$
+The computation of $q$ can be tricky. Direct enumeration, dynamic programming, Gibbs sampling and joint inference are considered according to different type of logic rules. The sets of logic rules are intuitive and based on the specific task, see Applications.</p>
+<ul>
+<li>How the rule weights are derived? Hyperparameters, hard constraints are set to infinity and others 1.</li>
+</ul>
+<h2 id="deep-compositional-question-answering-with-neural-module-networks">Deep Compositional Question Answering with Neural Module Networks</h2>
+<p>Contributions:</p>
+<ol>
+<li>Neural module network - incorporating different modules into one architecture.</li>
+<li>Construct NMN on VQA task based on the output of a semantic parser.</li>
+<li>A new dataset.</li>
+</ol>
+<p>Modules:</p>
+<ul>
+<li>
+<p>Attend: a conv output a heatmap indicating the region of interest.</p>
+</li>
+<li>
+<p>Re-Attend: a mlp maps an attention to another, based on some negator or directional words.</p>
+</li>
+<li>
+<p>Combine: two attentions stacked to one attention through a conv layer. Instances are some connectives.</p>
+</li>
+<li>
+<p>Classify: pass original image and attention to a mlp to output classification results.</p>
+</li>
+<li>
+<p>Measure: use to attention to predict, suitable for detection or counting.</p>
+</li>
+</ul>
+<p>Quetion -&gt; Parser -&gt; Layouts -&gt; Activated Modules -&gt; Prediction</p>
+<p>A single-layer LSTM is outside NMN and also generates answers given the question without the image.  <strong>Why?</strong> To introduce <strong>syntactic regularities</strong> (e.g. compensation for some loss of grammatical details from the parsing process) and <strong>semantic regularities</strong> (e.g. common knowledge like bears are usually brown not green).</p>
+<h2 id="the-neuro-symbolic-concept-learner">The Neuro-Symbolic Concept Learner</h2>
+<p>github <a href="https://github.com/vacancy/NSCL-PyTorch-Release">https://github.com/vacancy/NSCL-PyTorch-Release</a></p>
+<p>Perception Module + Semantic Parser + Symbolic Program Executor</p>
+<h3 id="visual-perception">Visual Perception:</h3>
+<ul>
+<li>pretrained Mask R-CNN for detection</li>
+<li>a resnet-34 extracts features from bbox and the original image respectively</li>
+<li>concatenate the two features to form a representation of an object</li>
+</ul>
+<h3 id="concept-quantization">Concept Quantization</h3>
+<ul>
+<li>each visual attribute corresponds to a neural operator which maps perception representations into an embedding space.</li>
+<li>Example: visual concepts like <em>Cube, Sphere</em> are learnable vectors in the embedding space of <em>Shape</em>.</li>
+<li>$\sigma\left(\left\langle\text { ShapeOf }\left(o_{i}\right), v^{\text {Cube }}\right\rangle-\gamma\right) / \tau$</li>
+<li>Example for computing relations of two objects: $\sigma\left(\left\langle\text { RelationOf }\left([o_{i}; o_{j}]\right), v^{\text {Left }}\right\rangle-\gamma\right) / \tau$</li>
+</ul>
+<h3 id="semantic-parser">Semantic Parser</h3>
+<ul>
+<li>
+<p>translates an question into an executable program with a hierachy of primitive operations. These operations are contained in a domain specific language(DSL).</p>
+</li>
+<li>
+<p>The operations are kind of like the modules introduced in the last paper.</p>
+</li>
+<li>
+<p>To make execution of operations differentiable w.r.t. visual representations, the output of an operation is a soft mask of length $\#{objects}$.</p>
+</li>
+</ul>
+<h3 id="program-execution">Program Execution</h3>
+<p><img src="content/pics/image-20200218155414940.png" alt="image-20200218155414940"></p>
+<ul>
+<li>Concept set ${c_i}$ is a set of all concept words appearing in questions, which is extracted using hand-coded rules. <u>The concept words for CLEVR dataset is known.</u> Automatic discovery of concept words is a future work.</li>
+<li>All decoders and encoders are bidirectional GRU network.</li>
+<li>Code reading&hellip;.</li>
+</ul>
+<h3 id="optimization">Optimization</h3>
+<p>$\left.\Theta_{v}, \Theta_{s} \leftarrow \arg \max _{\Theta_{v}, \Theta_{s}} \mathbb{E}_{P}\left[\operatorname{Pr}\left[A=\text { Executor(Perception }\left(S ; \Theta_{v}\right), P\right)\right]\right]$</p>
+<ul>
+<li>$\Theta_v$ is the parameters in visual perception module (including attribute operators and concept embedding). gradient: $\left.\nabla_{\Theta_{v}} \mathbb{E}_{P}\left[D_{\mathrm{KL}}\left(\text { Executor (Perception }\left(S ; \Theta_{v}\right), P\right) | A\right)\right]$</li>
+<li>$\Theta_v$ is the parameters in sematic parsing module. REINFORCE: $r=1$ if the answer is correct otherwise 0. $\nabla_{\Theta_{s}}=\mathbb{E}_{P}[r \cdot \log \operatorname{Pr}[P=\text { SemanticParse }\left(Q ; \Theta_{s}\right)]]$. It is approximated via Monte Carlo.</li>
+</ul>
+<h3 id="experiments">Experiments</h3>
+<p>How well the visual concepts are learned?</p>
+<ul>
+<li>Use the perception module only to do classification, near perfect performance.</li>
+<li>Use &ldquo;How Many&rdquo; question to evalute the performance.</li>
+</ul>
+<p>What&rsquo;s Program Annotation?</p>
+<p>How well the semantic parsers are learned?</p>
+<ul>
+<li>Evaluate the accuracy of programs by executing them on the ground-truth annotations of objects.</li>
+</ul>
+<p>Curriculum learning: split the training samples into 4 stages with incremental complexity of scenes and questions and train the model with the dataset stage by stage.</p>
+<p>Advantages:</p>
+<ul>
+<li>No need for class labels for objects.</li>
+<li>Strong ability of generalization</li>
+</ul>
+<h2 id="neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</h2>
+<p>$D_l$ labeled data，$D_a$ unlabeled data</p>
+<ol>
+<li>
+<p>Mine a set of aspect extraction rules $R_a$ and a set of opinion extraction rules $R_o$</p>
+</li>
+<li>
+<p>Extract terms for reviews in $D_a$ with mined rules, which can be used as a weakly labeled dataset $D_{a&rsquo;}$</p>
+</li>
+<li>
+<p>Train a neural network based on $D_l$ and $D_{a&rsquo;} $</p>
+</li>
+</ol>
+<p>Dependency Relation Extraction: (rel, $w_g$, $w_d$) denotes the dependency exists between $w_d$the governor and $w_d$ the dependent.</p>
+<p><img src="content/pics/image-20200218213047781.png" alt="image-20200218213047781"></p>
+<p>Generate rule candidates based on a training set and filter the rule candidates based on a val set.</p>
+<p><img src="content/pics/image-20200218213245649.png" alt="image-20200218213245649"></p>
+<p>Explanation of the pseudo-code:</p>
+<ul>
+<li>
+<p>$s_i.deps$ is the list of the dependency relations obtained by parsing. $list1$ and $list2$ contain the possible term extraction patterns.</p>
+</li>
+<li>
+<p>PatternsFromS1Deps can generate the following patterns from $(rel, w_g, w_d)$: $(rel, w_g, ps(w_d)^*)$, $(rel, POS(w_g), ps(w_d)^*)$, $(rel, O, ps(w_d)^*)$, where $O$ is a predefined set of opinion words. For aspect words, only nouns and verbs and considered.</p>
+</li>
+<li>
+<p>PatternsFromS2Deps generate patterns based on pairs of patterns returned by PatternFromS1Deps, and outputs all possible pattern pairs if there is a shared word in the dependency relation pair. (??? why output pair???)</p>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">__patterns_from_l2_dep_tags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">aspect_word_wc</span><span class="p">,</span> <span class="n">related_dep_tag_tups</span><span class="p">,</span> <span class="n">pos_tags</span><span class="p">,</span> <span class="n">term_word_idx_span</span><span class="p">):</span>
+        <span class="c1"># widx_beg, widx_end = term_word_idx_span</span>
+        <span class="n">patterns</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">dep_tag_i</span><span class="p">,</span> <span class="n">dep_tag_j</span> <span class="ow">in</span> <span class="n">related_dep_tag_tups</span><span class="p">:</span>
+            <span class="n">patterns_i</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__patterns_from_l1_dep_tags</span><span class="p">(</span>
+                <span class="n">aspect_word_wc</span><span class="p">,</span> <span class="p">[</span><span class="n">dep_tag_i</span><span class="p">],</span> <span class="n">pos_tags</span><span class="p">,</span> <span class="n">term_word_idx_span</span><span class="p">)</span>
+            <span class="n">patterns_j</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__patterns_from_l1_dep_tags</span><span class="p">(</span>
+                <span class="n">aspect_word_wc</span><span class="p">,</span> <span class="p">[</span><span class="n">dep_tag_j</span><span class="p">],</span> <span class="n">pos_tags</span><span class="p">,</span> <span class="n">term_word_idx_span</span><span class="p">)</span>
+            <span class="c1"># print(dep_tag_i, dep_tag_j)</span>
+            <span class="c1"># print(patterns_i, patterns_j)</span>
+
+            <span class="k">if</span> <span class="n">dep_tag_i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dep_tag_j</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">dep_tag_i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dep_tag_j</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">patterns_i</span> <span class="o">=</span> <span class="p">{(</span><span class="n">tup</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">patterns_i</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">patterns_i</span> <span class="o">=</span> <span class="p">{(</span><span class="n">tup</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">patterns_i</span><span class="p">}</span>
+
+            <span class="k">if</span> <span class="n">dep_tag_j</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dep_tag_i</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">dep_tag_j</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">dep_tag_i</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">patterns_j</span> <span class="o">=</span> <span class="p">{(</span><span class="n">tup</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">patterns_j</span><span class="p">}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">patterns_j</span> <span class="o">=</span> <span class="p">{(</span><span class="n">tup</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="k">for</span> <span class="n">tup</span> <span class="ow">in</span> <span class="n">patterns_j</span><span class="p">}</span>
+            <span class="c1"># print(patterns_i, patterns_j)</span>
+
+            <span class="k">for</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">patterns_i</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">pj</span> <span class="ow">in</span> <span class="n">patterns_j</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">pi</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">pi</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">!=</span> <span class="n">pj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">pj</span><span class="p">[</span><span class="mi">1</span><span class="p">]]:</span>
+                        <span class="c1"># print(pi, pj)</span>
+                        <span class="k">continue</span>
+                    <span class="k">if</span> <span class="n">pi</span> <span class="o">&lt;</span> <span class="n">pj</span><span class="p">:</span>
+                        <span class="n">patterns</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">pi</span><span class="p">,</span> <span class="n">pj</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">patterns</span><span class="o">.</span><span class="n">add</span><span class="p">((</span><span class="n">pj</span><span class="p">,</span> <span class="n">pi</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">patterns</span>
+</code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>FrequentPatterns calculates the frequency of  each rule candidate and delete the patterns appearing in the dataset less than $T$ times.</li>
+</ul>
+<p><u>Later homework</u>: Dependency Parsing&hellip;</p>
+<p><img src="content/pics/image-20200218215547259.png" alt="image-20200218215547259"></p>
+<p>TermFrom return the word $w$ if $w$ is a verb, and when $w$ is a noun it returns the noun phrase formed by the consecutive sequence of noun words including noun. $V_{fil}$ is a set of words that are unlikely to be aspect terms.</p>
+<p>Models and Training:</p>
+<p><img src="content/pics/image-20200219012948849.png" alt="image-20200219012948849"></p>
+<p>A and O are for aspect and opinion term extraction, M for manual label prediction. Three tasks are trained in 2 ways with two models shown in the figure. 1) train on the three tasks $t_a,\ t_o$ and $t_m$ alternately 2) pretrain on $t_a$ and $t_o$, then train on $t_m$. The evaluation metric is F1-score.</p>
+<p>For pseudo-labeled dataset, two copies of each sequence are fed to the model because a word can be both an aspect term and an opinion term due to inaccurate rules. There is no such need for $D_l$.</p>
+<h2 id="dl2-training-and-querying-neural-networks-with-logic">DL2: Training and Querying Neural Networks with Logic</h2>
+<p>Flaws of two methods with logic reasoning mentioned above:</p>
+<ol>
+<li>
+<p>PSL: incompatible with gradient-based optimization</p>
+</li>
+<li>
+<p>rule knowledge distillation: a) only constraints w.r.t. $X$ and $Y$ can be used and b) non-linear constraints w.r.t $Y$ leads to violation of convexity.</p>
+</li>
+</ol>
+<h3 id="constrained-neural-network">Constrained Neural Network</h3>
+<p>Define: A term $t$ can be input $\mathbf x$ or network weights $\theta$ or their (almost) differentiable functions.</p>
+<p>Comparison constraint: $t&lt; t'$, $t = t'$, $t\not = t'$, $t\leq t'$</p>
+<p>Constraint $\varphi$ is made up of comparison constraints with $\wedge$ , $\lor$, $\neg$</p>
+<p><strong>Translation into loss</strong>:
+$$
+\begin{aligned}
+\mathcal{L}\left(t \leq t^{\prime}\right)&amp;:=\max \left(t-t^{\prime}, 0\right)\\<br>
+\mathcal{L}\left(t \neq t^{\prime}\right)&amp;:=\xi \cdot\left[t=t^{\prime}\right]\\<br>
+{\mathcal{L}\left(\varphi^{\prime} \wedge \varphi^{\prime \prime}\right)} &amp;:={\mathcal{L}\left(\varphi^{\prime}\right)+\mathcal{L}\left(\varphi^{\prime \prime}\right)} \\<br>
+{\mathcal{L}\left(\varphi^{\prime} \vee \varphi^{\prime \prime}\right)} &amp;:={\mathcal{L}\left(\varphi^{\prime}\right) \cdot \mathcal{L}\left(\varphi^{\prime \prime}\right)}
+\end{aligned}
+$$
+Negation of a constraint can be rewritten into an equivalent constraint before translation into a loss.</p>
+<p><strong>Theorem 1</strong>: Non-negative loss $L(\varphi) = 0$ iff $\varphi$ is satisfied.</p>
+<p><strong>Training loss:</strong>
+$$\underset{\theta}{\arg \max } \operatorname{Pr}_{\boldsymbol{x} \sim \mathcal{D}} [\forall \boldsymbol{z} \in \mathbb{A},  \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)]$$</p>
+<p>can be transformed to</p>
+<p>$$ \underset{\theta}{\arg \max } \operatorname{Pr}_{\boldsymbol{x} \sim \mathcal{D}}\left[\varphi\left(\boldsymbol{x}, \boldsymbol{z}^{<em>}(\boldsymbol{x}, \theta), \theta\right)\right] \<br>
+z^{</em>}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \max }[\neg \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)] $$</p>
+<p>which follows the pattern of adversarial training: find the adversary violating the constraint and minimize the risk corresponding to the adversary.</p>
+<p>By theorem 1, we have approximation
+$$
+\boldsymbol{z}^{<em>}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \min } \mathcal{L}(\neg \varphi)(\boldsymbol{x}, \boldsymbol{z}, \theta)\<br>
+\underset{\theta}{\arg \min } \underset{\boldsymbol{x} \sim \mathcal{T}}{\mathbb{E}}\left[\mathcal{L}(\varphi)\left(\boldsymbol{x}, \boldsymbol{z}^{</em>}(\boldsymbol{x}, \theta), \theta\right)\right]
+$$</p>
+<p>$\boldsymbol x\sim \mathcal T$ means drawing x uniformly from dataset T to approximate distribution $\mathcal D$.</p>
+<p>For constraints like $|\boldsymbol x - \boldsymbol z | &lt; \epsilon$, we use them as convex sets for <strong>projected gradient descent</strong> rather than translate them into losses.</p>
+<h3 id="quering-networks">Quering Networks</h3>
+<p><img src="content/pics/image-20200220112313098.png" alt="image-20200220112313098"></p>
+<p>$\mathbf{find}$ defines a number of variables with given shape. The last two clauses can be omitted. When $\mathbf{return}$ clause is missing, the variables in $\mathbf{find}$ clause will be returned.</p>
+<p>Example:</p>
+<p><img src="content/pics/image-20200220112551684.png" alt="image-20200220112551684"></p>
+<p>$\mathbf{class}$ NN(i) = y is equivalent to $\bigwedge_{i=1, i \neq \mathrm{y}}^{k} p(x)_{i}&lt;p(x)_{y}$.  $\mathbf{in}$ for box constraints imposed on all elements in i(syntactic sugar). The constraint with infinity norm will be translated into equivalent version $\bigwedge_j |i_j|&lt;\epsilon$.</p>
+<p>DL2 translates these constraints into losses and find the optimizer with L-BFGS-B as the solution. If the solution is not found after a certain time, we restart L-BFGS-B and reinitialize the variables using MCMC sampling.</p>
+<h3 id="training">Training</h3>
+<p>For all experiments, a cross-entropy term is added to the loss.</p>
+<ol>
+<li>
+<p>Semi-Supervised Learning:</p>
+<p>Train network with cross-entropy loss on labeled data,  and the DL2 encoding of constraints like $\left(p_{\text {people}}&lt;\epsilon \vee p_{\text {people}}&gt;1-\epsilon\right) \wedge \ldots \wedge\left(p_{\text {trees}}&lt;\epsilon \vee p_{\text {trees}}&gt;1-\epsilon\right)$ to force predictions into groups on unlabeled data.</p>
+</li>
+<li>
+<p>Unsupervised Learning:</p>
+<p>To train a MLP to predict the minimum distance between two nodes on a given graph $G = (V, E)$, we can use a logical constraint like rules in dynamic program:</p>
+<p><img src="content/pics/image-20200220130118831.png" alt="image-20200220130118831"></p>
+</li>
+<li>
+<p>Supervised Learning</p>
+<p>Training neural networks meeting some sort of smoothness is desirable recently. Like Lipschitz:
+$$
+\left|\operatorname{logit}<em>{\theta}(\boldsymbol{x})-\operatorname{logit}</em>{\theta}\left(\boldsymbol{x}^{\prime}\right)\right|_{2}&lt;L\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|_{2}
+$$
+More generally, thanks to introduction of $z$, global constraints of Lipschitz can be:
+$$
+\left|\operatorname{logit}_{\theta}(\boldsymbol{z})-\operatorname{logit}_{\theta}\left(\boldsymbol{z}^{\prime}\right)\right|_{2}&lt;L\left|\boldsymbol{z}-\boldsymbol{z}^{\prime}\right|_{2},\
+\forall \boldsymbol{z} \in B_{\epsilon}(\boldsymbol{x}) \cap[0,1]^{d}, \boldsymbol{z}^{\prime} \in B_{\epsilon}\left(\boldsymbol{x}^{\prime}\right) \cap[0,1]^{d}
+$$</p>
+</li>
+</ol>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/machinelearning/">machinelearning</a>
+          <a href="/tags/deeplearning/">deeplearning</a>
+          <a href="/tags/nlp/">NLP</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/algorithms-on-graphs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Algorithms on Graphs</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
