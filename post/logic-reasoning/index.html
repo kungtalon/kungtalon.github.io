@@ -222,10 +222,10 @@ $$
 usually $\sum_{r \in R_{i}}\left(d_{r}\left(I^{\star}\right)\right)^{p}$ is used to approximate the expectation, where $I^*$ is the most probable interpretation <u>given the current weights</u> (iteratively update the weights).</p>
 <p>Note: Here $r \in R_i$ means for all <strong>groundings</strong> of rule $R_i$, and they share the same weight $\lambda_i$.</p>
 <p>From <em>Probabilistic Similarity Logic</em>, a procedure of MAP inference: ($I(\mathbf x)$ are interpretation of evidence propositions, $\mathbf y$ are propositions with unknown values, <em>activated</em> means the value is lower than 1)</p>
-<p><img src="content/pics/image-20200214212917837.png" alt="image-20200214212917837"></p>
+<p><img src="/content/pics/image-20200214212917837.png" alt="image-20200214212917837"></p>
 <p>By introducing an auxiliary variable $v_a$ for each atom a, we get a value for each rule r, denoted as $v_r$. Use the inequality constraint $v_r \geq d_r(I_{i-1})$ and hard constraints to construct the SOCP with the objective function $\sum_{r\in R}\lambda_r(d_r(I))^p$.</p>
 <h2 id="harnessing-deep-neural-networks-with-logic-rules">Harnessing Deep Neural Networks with Logic Rules</h2>
-<p><img src="content/pics/image-20200215165202859.png" alt="image-20200215165202859"></p>
+<p><img src="/content/pics/image-20200215165202859.png" alt="image-20200215165202859"></p>
 <p>$q(y|x)$ is a projection of the true distribution $p(y|x)$ to the subspace constrained by the rules. The loss of student network is:</p>
 <p>$$
 \pi \ell\left(\boldsymbol{s}<em>{n}^{(t)}, \boldsymbol{\sigma}</em>{\theta}\left(\boldsymbol{x}_{n}\right)\right)
@@ -307,7 +307,7 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 </li>
 </ul>
 <h3 id="program-execution">Program Execution</h3>
-<p><img src="content/pics/image-20200218155414940.png" alt="image-20200218155414940"></p>
+<p><img src="/content/pics/image-20200218155414940.png" alt="image-20200218155414940"></p>
 <ul>
 <li>Concept set ${c_i}$ is a set of all concept words appearing in questions, which is extracted using hand-coded rules. <u>The concept words for CLEVR dataset is known.</u> Automatic discovery of concept words is a future work.</li>
 <li>All decoders and encoders are bidirectional GRU network.</li>
@@ -350,9 +350,9 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 </li>
 </ol>
 <p>Dependency Relation Extraction: (rel, $w_g$, $w_d$) denotes the dependency exists between $w_d$the governor and $w_d$ the dependent.</p>
-<p><img src="content/pics/image-20200218213047781.png" alt="image-20200218213047781"></p>
+<p><img src="/content/pics/image-20200218213047781.png" alt="image-20200218213047781"></p>
 <p>Generate rule candidates based on a training set and filter the rule candidates based on a val set.</p>
-<p><img src="content/pics/image-20200218213245649.png" alt="image-20200218213245649"></p>
+<p><img src="/content/pics/image-20200218213245649.png" alt="image-20200218213245649"></p>
 <p>Explanation of the pseudo-code:</p>
 <ul>
 <li>
@@ -439,10 +439,10 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 <li>FrequentPatterns calculates the frequency of  each rule candidate and delete the patterns appearing in the dataset less than $T$ times.</li>
 </ul>
 <p><u>Later homework</u>: Dependency Parsing&hellip;</p>
-<p><img src="content/pics/image-20200218215547259.png" alt="image-20200218215547259"></p>
+<p><img src="/content/pics/image-20200218215547259.png" alt="image-20200218215547259"></p>
 <p>TermFrom return the word $w$ if $w$ is a verb, and when $w$ is a noun it returns the noun phrase formed by the consecutive sequence of noun words including noun. $V_{fil}$ is a set of words that are unlikely to be aspect terms.</p>
 <p>Models and Training:</p>
-<p><img src="content/pics/image-20200219012948849.png" alt="image-20200219012948849"></p>
+<p><img src="/content/pics/image-20200219012948849.png" alt="image-20200219012948849"></p>
 <p>A and O are for aspect and opinion term extraction, M for manual label prediction. Three tasks are trained in 2 ways with two models shown in the figure. 1) train on the three tasks $t_a,\ t_o$ and $t_m$ alternately 2) pretrain on $t_a$ and $t_o$, then train on $t_m$. The evaluation metric is F1-score.</p>
 <p>For pseudo-labeled dataset, two copies of each sequence are fed to the model because a word can be both an aspect term and an opinion term due to inaccurate rules. There is no such need for $D_l$.</p>
 <h2 id="dl2-training-and-querying-neural-networks-with-logic">DL2: Training and Querying Neural Networks with Logic</h2>
@@ -484,10 +484,10 @@ $$</p>
 <p>$\boldsymbol x\sim \mathcal T$ means drawing x uniformly from dataset T to approximate distribution $\mathcal D$.</p>
 <p>For constraints like $|\boldsymbol x - \boldsymbol z | &lt; \epsilon$, we use them as convex sets for <strong>projected gradient descent</strong> rather than translate them into losses.</p>
 <h3 id="quering-networks">Quering Networks</h3>
-<p><img src="content/pics/image-20200220112313098.png" alt="image-20200220112313098"></p>
+<p><img src="/content/pics/image-20200220112313098.png" alt="image-20200220112313098"></p>
 <p>$\mathbf{find}$ defines a number of variables with given shape. The last two clauses can be omitted. When $\mathbf{return}$ clause is missing, the variables in $\mathbf{find}$ clause will be returned.</p>
 <p>Example:</p>
-<p><img src="content/pics/image-20200220112551684.png" alt="image-20200220112551684"></p>
+<p><img src="/content/pics/image-20200220112551684.png" alt="image-20200220112551684"></p>
 <p>$\mathbf{class}$ NN(i) = y is equivalent to $\bigwedge_{i=1, i \neq \mathrm{y}}^{k} p(x)_{i}&lt;p(x)_{y}$.  $\mathbf{in}$ for box constraints imposed on all elements in i(syntactic sugar). The constraint with infinity norm will be translated into equivalent version $\bigwedge_j |i_j|&lt;\epsilon$.</p>
 <p>DL2 translates these constraints into losses and find the optimizer with L-BFGS-B as the solution. If the solution is not found after a certain time, we restart L-BFGS-B and reinitialize the variables using MCMC sampling.</p>
 <h3 id="training">Training</h3>
@@ -500,7 +500,7 @@ $$</p>
 <li>
 <p>Unsupervised Learning:</p>
 <p>To train a MLP to predict the minimum distance between two nodes on a given graph $G = (V, E)$, we can use a logical constraint like rules in dynamic program:</p>
-<p><img src="content/pics/image-20200220130118831.png" alt="image-20200220130118831"></p>
+<p><img src="/content/pics/image-20200220130118831.png" alt="image-20200220130118831"></p>
 </li>
 <li>
 <p>Supervised Learning</p>
