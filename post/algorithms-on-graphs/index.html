@@ -54,7 +54,7 @@
 <meta itemprop="description" content="This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems.">
 <meta itemprop="datePublished" content="2022-02-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2022-02-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="631">
+<meta itemprop="wordCount" content="643">
 
 
 
@@ -177,12 +177,13 @@
       <h2 id="maximum--minimum-spanning-tree">Maximum / Minimum Spanning Tree</h2>
 <h3 id="background">Background</h3>
 <ul>
-<li>The pair-wise distances are known for all nodes\</li>
+<li>The pair-wise distances are known for all nodes</li>
 <li>The most usual tasks include constructing a highway network, an electricity network, etc.</li>
 <li>Only works for weighted undirected graphs</li>
 <li>The principle of Maximum Spanning Tree is totally the same as Minimum Spanning Tree</li>
 </ul>
 <h3 id="prims-algorithm">Prim&rsquo;s Algorithm</h3>
+<p>Use two separate sets, U and V. Each time, find the closest node in U to V and put that node into V, and update the distances from each node in U to V.</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -199,7 +200,7 @@
 <pre class="chroma"><code class="language-python" data-lang="python"><span class="n">U</span> <span class="o">=</span> <span class="p">[</span><span class="nb">all</span> <span class="n">nodes</span> <span class="k">except</span> <span class="mi">0</span><span class="p">]</span>
 <span class="n">V</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 <span class="n">minDist</span> <span class="o">=</span> <span class="p">[</span><span class="n">adj</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">nodes</span><span class="p">]</span>
-<span class="n">minDistVex</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>  <span class="c1"># 这个数组保存的是当前离结点i最近的V中结点的下标</span>
+<span class="n">minDistVex</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">n</span>    <span class="c1"># This array records the currently closest node in V to node i</span>
 
 <span class="k">while</span> <span class="n">U</span><span class="p">:</span>
     <span class="n">find</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">U</span> <span class="n">such</span> <span class="n">that</span> <span class="n">minimize</span> <span class="n">minDist</span><span class="p">,</span> <span class="n">add</span> <span class="n">edge</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">minDistVex</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
@@ -207,7 +208,11 @@
     <span class="n">use</span> <span class="n">adj</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="n">to</span> <span class="n">update</span> <span class="n">minDist</span> <span class="ow">and</span> <span class="n">minDistVex</span>
 </code></pre></td></tr></table>
 </div>
-</div><p>The complexity is $O(n^2)$, which means that it is suited for dense networks with an adequate number of nodes.</p>
+</div><p>A visual example:</p>
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/PrimAlgDemo.gif" alt="PrimAlgo.gif"/>
+</p>
+<p>The complexity is $O(n^2)$, which means that it is suited for dense networks with an adequate number of nodes.</p>
 <h3 id="kruskals-algorithm">Kruskal&rsquo;s Algorithm</h3>
 <p>Put the edges into <code>ans</code> in ascending order of the edge weights. At the same time, use <strong>UnionFind</strong> to avoid circles.</p>
 <div class="highlight"><div class="chroma">
@@ -239,6 +244,10 @@
 </code></pre></td></tr></table>
 </div>
 </div><p>Complexity $O(ElogE)$，suited for sparse networks.</p>
+<p>A visual example:</p>
+<p align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/b/bb/KruskalDemo.gif" alt="KruskalAlgo.gif"/>
+</p>
 <h2 id="shortest-path-problems">Shortest Path Problems</h2>
 <h3 id="background-1">Background</h3>
 <ul>
@@ -364,6 +373,9 @@
 </div><p>A really easily implemented algorithm, which on the contrary is hard to interpret. It is obvious that the complexity is $O(n^3)$.</p>
 <h2 id="topology-ordering">Topology Ordering</h2>
 <p>Topology Ordering is used to generate a linear-ordering from any partial-ordering relation. A queue is typically used to mark the nodes currently having no inputs.</p>
+<p align="center">
+<img src="https://i.imgur.com/Q3MA6dZ.png" alt=""/>
+</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
