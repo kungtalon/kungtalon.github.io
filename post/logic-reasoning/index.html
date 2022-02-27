@@ -54,7 +54,7 @@
 <meta itemprop="description" content="A short review of some recent researches on logic reasoning.">
 <meta itemprop="datePublished" content="2020-03-04T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2020-03-04T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="2187">
+<meta itemprop="wordCount" content="2222">
 
 
 
@@ -151,15 +151,15 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#a-short-introduction-to-probabilistic-soft-logic">A Short Introduction to Probabilistic Soft Logic</a>
+        <li><a href="#1-a-short-introduction-to-probabilistic-soft-logic">1. A Short Introduction to Probabilistic Soft Logic</a>
           <ul>
             <li><a href="#semantics">Semantics</a></li>
             <li><a href="#inference--learning">Inference &amp; Learning</a></li>
           </ul>
         </li>
-        <li><a href="#harnessing-deep-neural-networks-with-logic-rules">Harnessing Deep Neural Networks with Logic Rules</a></li>
-        <li><a href="#deep-compositional-question-answering-with-neural-module-networks">Deep Compositional Question Answering with Neural Module Networks</a></li>
-        <li><a href="#the-neuro-symbolic-concept-learner">The Neuro-Symbolic Concept Learner</a>
+        <li><a href="#2-harnessing-deep-neural-networks-with-logic-rules">2. Harnessing Deep Neural Networks with Logic Rules</a></li>
+        <li><a href="#3-deep-compositional-question-answering-with-neural-module-networks">3. Deep Compositional Question Answering with Neural Module Networks</a></li>
+        <li><a href="#4-the-neuro-symbolic-concept-learner">4. The Neuro-Symbolic Concept Learner</a>
           <ul>
             <li><a href="#visual-perception">Visual Perception:</a></li>
             <li><a href="#concept-quantization">Concept Quantization</a></li>
@@ -169,8 +169,8 @@
             <li><a href="#experiments">Experiments</a></li>
           </ul>
         </li>
-        <li><a href="#neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</a></li>
-        <li><a href="#dl2-training-and-querying-neural-networks-with-logic">DL2: Training and Querying Neural Networks with Logic</a>
+        <li><a href="#5neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">5.Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</a></li>
+        <li><a href="#6-dl2-training-and-querying-neural-networks-with-logic">6. DL2: Training and Querying Neural Networks with Logic</a>
           <ul>
             <li><a href="#constrained-neural-network">Constrained Neural Network</a></li>
             <li><a href="#quering-networks">Quering Networks</a></li>
@@ -184,7 +184,7 @@
   </div>
 </div>
     <div class="post-content">
-      <h2 id="a-short-introduction-to-probabilistic-soft-logic">A Short Introduction to Probabilistic Soft Logic</h2>
+      <h2 id="1-a-short-introduction-to-probabilistic-soft-logic">1. A Short Introduction to Probabilistic Soft Logic</h2>
 <h3 id="semantics">Semantics</h3>
 <p>Rule: Body $\rightarrow$ Head  $r = r_{body} \rightarrow r_{head} = \neg r_{body} \lor r_{head}$</p>
 <p><strong>Interpretation</strong>: A mapping $I: \ell \rightarrow [0,1]^{n}$, which provides a set of assignments to atoms, whose probabilities can then be determined. In mathematical logic, an <strong>assignment</strong> is mapping entities from domain $D$ to variables in a proposition and by assignment we get a boolean value of the proposition.  A <strong>grouding</strong> of a rule represents an instantiation of all variables in the rule after assignment.</p>
@@ -224,12 +224,13 @@ usually $\sum_{r \in R_{i}}\left(d_{r}\left(I^{\star}\right)\right)^{p}$ is used
 <p>From <em>Probabilistic Similarity Logic</em>, a procedure of MAP inference: ($I(\mathbf x)$ are interpretation of evidence propositions, $\mathbf y$ are propositions with unknown values, <em>activated</em> means the value is lower than 1)</p>
 <p><img src="/content/pics/image-20200214212917837.png" alt="image-20200214212917837"></p>
 <p>By introducing an auxiliary variable $v_a$ for each atom a, we get a value for each rule r, denoted as $v_r$. Use the inequality constraint $v_r \geq d_r(I_{i-1})$ and hard constraints to construct the SOCP with the objective function $\sum_{r\in R}\lambda_r(d_r(I))^p$.</p>
-<h2 id="harnessing-deep-neural-networks-with-logic-rules">Harnessing Deep Neural Networks with Logic Rules</h2>
+<h2 id="2-harnessing-deep-neural-networks-with-logic-rules">2. Harnessing Deep Neural Networks with Logic Rules</h2>
 <p><img src="/content/pics/image-20200215165202859.png" alt="image-20200215165202859"></p>
 <p>$q(y|x)$ is a projection of the true distribution $p(y|x)$ to the subspace constrained by the rules. The loss of student network is:</p>
-<p>$$
-\pi \ell\left(\boldsymbol{s}<em>{n}^{(t)}, \boldsymbol{\sigma}</em>{\theta}\left(\boldsymbol{x}_{n}\right)\right)
-$$</p>
+<p>$$\begin{align}
+\boldsymbol{\theta}^{(t+1)}=\arg \min _{\theta \in \Theta} \frac{1}{N} \sum _{n=1}^{N}(1-\pi) \ell\left(\boldsymbol{y} _{n}, \boldsymbol{\sigma} _{\theta}\left(\boldsymbol{x} _{n}\right)\right) \
++\pi \ell\left(\boldsymbol{s} _{n}^{(t)}, \boldsymbol{\sigma} _{\theta}\left(\boldsymbol{x} _{n}\right)\right)
+\end{align}$$</p>
 <p>where $\boldsymbol{s}_{n}^{(t)}$ is the soft prediction of q on $\boldsymbol{x}_n$, $\pi$ is the weight balancing between the task of emulating the teacher network and the task of predicting the true labels.</p>
 <p>Compared with training a projected network and other models, the procedure has advantages:</p>
 <ol>
@@ -251,7 +252,7 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 <ul>
 <li>How the rule weights are derived? Hyperparameters, hard constraints are set to infinity and others 1.</li>
 </ul>
-<h2 id="deep-compositional-question-answering-with-neural-module-networks">Deep Compositional Question Answering with Neural Module Networks</h2>
+<h2 id="3-deep-compositional-question-answering-with-neural-module-networks">3. Deep Compositional Question Answering with Neural Module Networks</h2>
 <p>Contributions:</p>
 <ol>
 <li>Neural module network - incorporating different modules into one architecture.</li>
@@ -278,7 +279,7 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 </ul>
 <p>Quetion -&gt; Parser -&gt; Layouts -&gt; Activated Modules -&gt; Prediction</p>
 <p>A single-layer LSTM is outside NMN and also generates answers given the question without the image.  <strong>Why?</strong> To introduce <strong>syntactic regularities</strong> (e.g. compensation for some loss of grammatical details from the parsing process) and <strong>semantic regularities</strong> (e.g. common knowledge like bears are usually brown not green).</p>
-<h2 id="the-neuro-symbolic-concept-learner">The Neuro-Symbolic Concept Learner</h2>
+<h2 id="4-the-neuro-symbolic-concept-learner">4. The Neuro-Symbolic Concept Learner</h2>
 <p>github <a href="https://github.com/vacancy/NSCL-PyTorch-Release">https://github.com/vacancy/NSCL-PyTorch-Release</a></p>
 <p>Perception Module + Semantic Parser + Symbolic Program Executor</p>
 <h3 id="visual-perception">Visual Perception:</h3>
@@ -336,7 +337,7 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 <li>No need for class labels for objects.</li>
 <li>Strong ability of generalization</li>
 </ul>
-<h2 id="neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</h2>
+<h2 id="5neural-aspect-and-opinion-term-extraction-with-mined-rules-as-weak-supervision">5.Neural Aspect and Opinion Term Extraction with Mined Rules as Weak Supervision</h2>
 <p>$D_l$ labeled data，$D_a$ unlabeled data</p>
 <ol>
 <li>
@@ -445,7 +446,7 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 <p><img src="/content/pics/image-20200219012948849.png" alt="image-20200219012948849"></p>
 <p>A and O are for aspect and opinion term extraction, M for manual label prediction. Three tasks are trained in 2 ways with two models shown in the figure. 1) train on the three tasks $t_a,\ t_o$ and $t_m$ alternately 2) pretrain on $t_a$ and $t_o$, then train on $t_m$. The evaluation metric is F1-score.</p>
 <p>For pseudo-labeled dataset, two copies of each sequence are fed to the model because a word can be both an aspect term and an opinion term due to inaccurate rules. There is no such need for $D_l$.</p>
-<h2 id="dl2-training-and-querying-neural-networks-with-logic">DL2: Training and Querying Neural Networks with Logic</h2>
+<h2 id="6-dl2-training-and-querying-neural-networks-with-logic">6. DL2: Training and Querying Neural Networks with Logic</h2>
 <p>Flaws of two methods with logic reasoning mentioned above:</p>
 <ol>
 <li>
@@ -471,17 +472,17 @@ $$
 Negation of a constraint can be rewritten into an equivalent constraint before translation into a loss.</p>
 <p><strong>Theorem 1</strong>: Non-negative loss $L(\varphi) = 0$ iff $\varphi$ is satisfied.</p>
 <p><strong>Training loss:</strong>
-$$\underset{\theta}{\arg \max } \operatorname{Pr}_{\boldsymbol{x} \sim \mathcal{D}} [\forall \boldsymbol{z} \in \mathbb{A},  \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)]$$</p>
+$$\underset{\theta}{\arg \max } \operatorname{Pr}_ {\boldsymbol{x} \sim \mathcal{D}} [\forall \boldsymbol{z} \in \mathbb{A},  \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)]$$</p>
 <p>can be transformed to</p>
-<p>$$ \underset{\theta}{\arg \max } \operatorname{Pr}_{\boldsymbol{x} \sim \mathcal{D}}\left[\varphi\left(\boldsymbol{x}, \boldsymbol{z}^{<em>}(\boldsymbol{x}, \theta), \theta\right)\right] \<br>
-z^{</em>}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \max }[\neg \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)] $$</p>
+<p>$$ \underset{\theta}{\arg \max } \operatorname{Pr}_ {\boldsymbol{x} \sim \mathcal{D}}\left[\varphi\left(\boldsymbol{x}, \boldsymbol{z}^{*}(\boldsymbol{x}, \theta), \theta\right)\right] \<br>
+z^{*}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \max }[\neg \varphi(\boldsymbol{x}, \boldsymbol{z}, \theta)] $$</p>
 <p>which follows the pattern of adversarial training: find the adversary violating the constraint and minimize the risk corresponding to the adversary.</p>
-<p>By theorem 1, we have approximation
-$$
-\boldsymbol{z}^{<em>}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \min } \mathcal{L}(\neg \varphi)(\boldsymbol{x}, \boldsymbol{z}, \theta)\<br>
-\underset{\theta}{\arg \min } \underset{\boldsymbol{x} \sim \mathcal{T}}{\mathbb{E}}\left[\mathcal{L}(\varphi)\left(\boldsymbol{x}, \boldsymbol{z}^{</em>}(\boldsymbol{x}, \theta), \theta\right)\right]
+<p>By theorem 1, we have approximation</p>
+<p>$$
+\boldsymbol{z} ^{*}(\boldsymbol{x}, \theta)=\underset{\boldsymbol{z} \in \mathbb{A}}{\arg \min } \mathcal{L}(\neg \varphi)(\boldsymbol{x}, \boldsymbol{z}, \theta)\<br>
+\underset{\theta}{\arg \min } \underset{\boldsymbol{x} \sim \mathcal{T}}{\mathbb{E}}\left[\mathcal{L}(\varphi)\left(\boldsymbol{x}, \boldsymbol{z} ^{*}(\boldsymbol{x}, \theta), \theta\right)\right]
 $$</p>
-<p>$\boldsymbol x\sim \mathcal T$ means drawing x uniformly from dataset T to approximate distribution $\mathcal D$.</p>
+<p>where $\boldsymbol x\sim \mathcal T$ means drawing x uniformly from dataset T to approximate distribution $\mathcal D$.</p>
 <p>For constraints like $|\boldsymbol x - \boldsymbol z | &lt; \epsilon$, we use them as convex sets for <strong>projected gradient descent</strong> rather than translate them into losses.</p>
 <h3 id="quering-networks">Quering Networks</h3>
 <p><img src="/content/pics/image-20200220112313098.png" alt="image-20200220112313098"></p>
@@ -505,13 +506,11 @@ $$</p>
 <li>
 <p>Supervised Learning</p>
 <p>Training neural networks meeting some sort of smoothness is desirable recently. Like Lipschitz:
-$$
-\left|\operatorname{logit}<em>{\theta}(\boldsymbol{x})-\operatorname{logit}</em>{\theta}\left(\boldsymbol{x}^{\prime}\right)\right|_{2}&lt;L\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right|_{2}
-$$
-More generally, thanks to introduction of $z$, global constraints of Lipschitz can be:
-$$
-\left|\operatorname{logit}_{\theta}(\boldsymbol{z})-\operatorname{logit}_{\theta}\left(\boldsymbol{z}^{\prime}\right)\right|_{2}&lt;L\left|\boldsymbol{z}-\boldsymbol{z}^{\prime}\right|_{2},\
-\forall \boldsymbol{z} \in B_{\epsilon}(\boldsymbol{x}) \cap[0,1]^{d}, \boldsymbol{z}^{\prime} \in B_{\epsilon}\left(\boldsymbol{x}^{\prime}\right) \cap[0,1]^{d}
+$$\left|\operatorname{logit} _{\theta}(\boldsymbol{x})-\operatorname{logit} _{\theta}\left(\boldsymbol{x}^{\prime}\right)\right| _{2}&lt;L\left|\boldsymbol{x}-\boldsymbol{x}^{\prime}\right| _{2}$$</p>
+<p>More generally, thanks to introduction of $z$, global constraints of Lipschitz can be:</p>
+<p>$$
+\left|\operatorname{logit} _{\theta}(\boldsymbol{z})-\operatorname{logit} _{\theta}\left(\boldsymbol{z}^{\prime}\right)\right| _{2}&lt;L\left|\boldsymbol{z}-\boldsymbol{z}^{\prime}\right| _{2},\
+\forall \boldsymbol{z} \in B _{\epsilon}(\boldsymbol{x}) \cap[0,1]^{d}, \boldsymbol{z}^{\prime} \in B _{\epsilon}\left(\boldsymbol{x}^{\prime}\right) \cap[0,1]^{d}
 $$</p>
 </li>
 </ol>
