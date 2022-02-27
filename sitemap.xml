@@ -1,71 +1,71 @@
-<?xml-stylesheet type="text/xsl" href="http://localhost:1313/sitemap.xsl"?>
+<?xml-stylesheet type="text/xsl" href="https://kungtalon.github.io/sitemap.xsl"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://localhost:1313/tags/algorithm/</loc>
+    <loc>https://kungtalon.github.io/tags/algorithm/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/algorithms-on-graphs/</loc>
+    <loc>https://kungtalon.github.io/post/algorithms-on-graphs/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://kungtalon.github.io/categories/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/graph/</loc>
+    <loc>https://kungtalon.github.io/tags/graph/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/leetcode/</loc>
+    <loc>https://kungtalon.github.io/tags/leetcode/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/categories/leetcode/</loc>
+    <loc>https://kungtalon.github.io/categories/leetcode/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/post/</loc>
+    <loc>https://kungtalon.github.io/post/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://kungtalon.github.io/tags/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://kungtalon.github.io/</loc>
     <lastmod>2022-02-27T00:00:00+00:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>http://localhost:1313/posts/my-first-post/</loc>
+    <loc>https://kungtalon.github.io/posts/my-first-post/</loc>
     <lastmod>2021-10-14T13:18:11-04:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.5</priority>
