@@ -54,7 +54,7 @@
 <meta itemprop="description" content="For non-smooth (non-differentiable) functions, subgradients can work as well as gradients when it comes to optimization. Check the definition and principle of subgradients here.">
 <meta itemprop="datePublished" content="2019-02-08T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2019-02-08T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="463">
+<meta itemprop="wordCount" content="467">
 
 
 
@@ -165,7 +165,7 @@
 <p>If $f(x)$ is a convex function, then the set $\partial f = \{v | f(x) \ge f(x _0) + v^T (x - x _0)\}$ is called the sub-gradient of $f(x)$ at the point of $x _0$. Here $v$ should be limited to a small neighborhood of $x _0$. Note that $v^T (x- x _0)$ can be a generalized inner product in some Banach space other than Euclidean space.</p>
 <p>It is apparent that, if $f(x)$ is differentiable at $x _0$, then by definition $f(x) - f(x _0) = f&rsquo;(x _0) ^T (x - x _0) + o(\| x - x _0 \|) \ge v^T (x - x_0)$. In this case, we can say that the sub-gradient of $f(x)$ at $x _0$ is exactly the gradient $f&rsquo;(x _0)$. For non-differentiable points, the sub-gradient should be a set.</p>
 <h2 id="geometric-explanation">Geometric Explanation</h2>
-<p>Recall that, for unary functions, the derivative of $f(x)$ is the slope of the line lying exactly below the curve of $y = f(x)$ and tangent to the curve at $x _0$. Similarly, the subgradient corresponds to the lines lying below the function curve and $x _0$ is a intersection. Just like what <a href="#picture1">P1</a> shows. When $f(x)$ is differentiable, such lines will merge into one, and that is the tangent line.</p>
+<p>Recall that, for unary functions, the derivative of $f(x)$ is the slope of the line lying exactly below the curve of $y = f(x)$ and tangent to the curve at $x _0$. Similarly, the subgradient corresponds to the lines lying below the function curve and $x _0$ is a intersection. Just like what <a href="#picture1">P1</a> shows. When $f(x)$ is differentiable at $x _0$, such lines will merge into one, and that is the tangent line.</p>
 <div id="picture1" align="center">
 <img src="/content/csdn/subgradient1.png" alt="P1">
 <p>P1. The slopes of these lines are subgradients.</p>
@@ -177,7 +177,7 @@
 <p>In Machine Learning, the $\ell _1$ regularization term is frequently used while it&rsquo;s not differentiable at $x = 0$. However, we can still get the subgradient, which looks the same as the <code>absolute</code> function $\{v |\ \| x \|\ge v^T x \}$ and the solution is $\| v\|\le 1$.</p>
 <h2 id="application">Application</h2>
 <p>The purpose of introducing subgradient in optimization is that we can derive a necessary condition for non-smooth functions to attain minima and maxima.</p>
-<p><strong>Theorem</strong>: If $f(x)$ is a convex function and there exists a subgradient within a neighborhood of $x _0$, then $x _0$ is a extrema of $f(x)$ if $0 \in \partial f$.</p>
+<p><strong>Theorem</strong>: If $f(x)$ is a convex function and there exists a subgradient within a neighborhood of $x _0$, then $x _0$ is a extrema of $f(x)$ if $0 \in \partial f(x _0)$.</p>
 <p>For differentiable functions, a necessary condition for an extremum is that the slope of the tangent line is 0 (Fermat&rsquo;s Theorem). So considering the geometric meaning of subgradient, this theorem indicates that there exists such a horizontal line that it is under the curve and intersect at $x _0$.</p>
 <p>Similarly, we can modify the KKT condition from $\nabla \mathcal L (x, \lambda) = 0$ to $0 \in \partial \mathcal L (x, \lambda)$. Therefore, subgradient becomes really useful when it comes to solving the optimization problems of some non-differentiable target functions like $\ell _1$ norm.</p>
 
