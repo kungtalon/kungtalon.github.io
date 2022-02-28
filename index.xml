@@ -23,7 +23,7 @@
     <item>
       <title>A Search Engine for Academic Computer Vision Papers</title>
       <link>https://kungtalon.github.io/post/cv-search-engine/</link>
-      <pubDate>Fri, 10 Dec 2021 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
       
       <guid>https://kungtalon.github.io/post/cv-search-engine/</guid>
       <description>We proposed a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this &lt;a href=&#34;https://taloncvsearch.com&#34;&gt;link&lt;/a&gt;. Full code is available on our Github.</description>
