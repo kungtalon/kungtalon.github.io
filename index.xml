@@ -35,7 +35,7 @@
       <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
       
       <guid>https://kungtalon.github.io/post/intro-to-recommendation-system-algo/</guid>
-      <description>This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems.</description>
+      <description>This blog covers introduction to common algorithms in recommendation systems including Collaborative Filtering, Factorization Machine, Wide&amp;amp;Deep and DeepFM.</description>
     </item>
     
     <item>
