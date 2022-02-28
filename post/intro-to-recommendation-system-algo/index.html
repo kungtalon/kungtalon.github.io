@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Evolvement of Recommendation System Algorithms - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/intro-to-recommendation-system-algo/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.cf182d97ad4a726b57eda4db6a961beb5f2bd47cefbfacf9f1d626995e1124e8.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Evolvement of Recommendation System Algorithms" />
+<meta property="og:description" content="This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/intro-to-recommendation-system-algo/" />
+<meta property="article:published_time" content="2020-06-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-25T00:00:00+00:00" />
+<meta itemprop="name" content="Evolvement of Recommendation System Algorithms">
+<meta itemprop="description" content="This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems.">
+<meta itemprop="datePublished" content="2020-06-25T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2020-06-25T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1060">
+
+
+
+<meta itemprop="keywords" content="recommendation_system,machine_learning,deep_learning," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Evolvement of Recommendation System Algorithms"/>
+<meta name="twitter:description" content="This post covers 6 types of algorithms on graph that people may encounter when they are doing leetcode for graph-related problems."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Evolvement of Recommendation System Algorithms</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-06-25 </span>
+        <div class="post-category">
+            <a href="/categories/recommendation_system/"> recommendation_system </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#machine-learning-models">Machine Learning Models</a>
+          <ul>
+            <li><a href="#cf---collaborative-filtering">CF - Collaborative Filtering</a></li>
+            <li><a href="#fm-factorization-machine">FM Factorization Machine</a></li>
+            <li><a href="#ffm">FFM:</a></li>
+            <li><a href="#gbdtlr">GBDT+LR</a></li>
+            <li><a href="#ls-plm">LS-PLM</a></li>
+          </ul>
+        </li>
+        <li><a href="#deep-learning-model">Deep Learning Model</a>
+          <ul>
+            <li><a href="#autorec">AutoRec</a></li>
+            <li><a href="#neural-cf">Neural CF</a></li>
+            <li><a href="#pnn">PNN</a></li>
+            <li><a href="#wide--deep">Wide &amp; Deep</a></li>
+            <li><a href="#deepfm">DeepFM</a></li>
+            <li><a href="#din">DIN</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="https://imgconvert.csdnimg.cn/aHR0cHM6Ly91c2VyLWdvbGQtY2RuLnhpdHUuaW8vMjAyMC82LzIzLzE3MmUxOTNiMGQxMTY4ZTE?x-oss-process=image/format,png" alt=""></p>
+<h2 id="machine-learning-models">Machine Learning Models</h2>
+<h3 id="cf---collaborative-filtering">CF - Collaborative Filtering</h3>
+<p>To recommend new items to a user <code>u</code>, we can use the existing scores that <code>u</code> has already scored. At the same time, the similarity between two items can be evaluated by the review scores from all users. According to the feedback of items that the user <code>u</code> has already evaluated, we can estimate the score of the product <code>p</code>:
+$$ R_{u,p} = \sum _{h\in H} w_{ph}\cdot R_{uh} $$
+$$ w_{ph} =  \frac{\sum _{v \in U_p \cap U_h} R_{vp} R_{vh}}{\sqrt{\sum _{v \in U_p} R_{vp}^2} \sqrt{\sum _{v \in U_h} R_{vh}^2}} $$
+where $H$ is the set of products <code>u</code> has scored and $U_p$, $U_h$ are the users who have scored the product <code>p</code> and <code>h</code> respectively. Here the similarity is defined as cosine similarity, while pearson similarity is more common in information retrieval.</p>
+<div align=center>
+<img src="/content/csdn/recsys0.png" width="600"/>
+</div>
+<h3 id="fm-factorization-machine">FM Factorization Machine</h3>
+<p>It is an improved version of logistic regression, which uses the product of embedding vectors $ \mathbf {w} _i^T \cdot \mathbf{w} _j $ to substitute the interaction term $w _{ij}$. This method reduces the parameters from $n^2$ to $nk$, where $k$ is the embedding dimension.</p>
+<h3 id="ffm">FFM:</h3>
+<p>The concept of <code>field</code> is introduced based on FM. It is equivalent to split an original sparse features into $f$ sparse features (use $f$ different embeddings for the same sparse feature), where $f$ is the number of fields. For example, feature i and feature j belong to the field a, and feature k belongs to the field b. For the interaction term of feature i &amp; j, it is $\mathbf {w} _{ia} ^T \mathbf {w} _{ja}$, while the interaction term of feature i &amp; k is $\mathbf{w} _{ib}^T \mathbf{w} _{ka}$. The number of parameters is $knf$.</p>
+<h3 id="gbdtlr">GBDT+LR</h3>
+<p>For each subtree of GBDT, each input x will be assigned to a certain leaf node. Set this leaf node to 1, and set other leaf nodes to 0, and then we get a representation of this subtree, which looks like a binary vector. The feature vectors of the subtrees are concatenated to get a high-dimensional sparse vector, which is then passed to LR for CTR prediction.</p>
+<div align=center>
+<img src="/content/csdn/recsys1.png" width="400"/>
+</div>
+<p>Advantages of regression trees:</p>
+<ul>
+<li>High-order interaction features can be learned, and this order can be as high as the depth of the subtree.</li>
+</ul>
+<p>Disadvantages of regression trees:</p>
+<ul>
+<li>A large amount of accurate numerical information is lost</li>
+<li>It is prone to overfitting.</li>
+<li>The training time of GBDT is too long.</li>
+</ul>
+<h3 id="ls-plm">LS-PLM</h3>
+<p>This methods incorporates the idea of clustering (Mixture Model) into logistic regression. Separate items into $m$ subclasses, train $m$ different LR models for these subclasses and train a softmax regression model to predict the probability that the input $x$ belongs to each subclass.
+$$ f(x) = \sum_{i=1}^{m} \pi_i(x) \eta_i(x) = \sum_{i=1}^m \frac{e^{\mu_ix}}{\sum_{j=1}^m e^{\mu_jx}}\cdot \frac{1}{1+e^{-w_ix}}  $$
+Advantage:</p>
+<ul>
+<li>Nonlinearity brings better model capacity</li>
+<li>Grouped L2 norm is added to improve generalization</li>
+</ul>
+<h2 id="deep-learning-model">Deep Learning Model</h2>
+<h3 id="autorec">AutoRec</h3>
+<p>Let $V$ be the scoring matrix. Here an auto-encoder is trained to reconstruct the scoring matrix. The hidden layer can be interpreted as a set of user embeddings and item embeddings.</p>
+<p>$$ min \sum_{i=1}^n \Vert V_{i}-h(V_i;\theta) \Vert^2 + \frac{\lambda}{2}(\Vert W \Vert^2 + \Vert  V\Vert^2) $$</p>
+<p>where $W$ is parameters of MLP.</p>
+<h3 id="neural-cf">Neural CF</h3>
+<p>Embedding layer is used to extract representation vectors for users and items. Instead of inner product, Neural CF feeds the vector of user <code>u</code> and item <code>p</code> to an MLP to predict CTR. It is because MLP is better at feature interaction than a simple operation like inner product. Besides, we can do element-wise product of the <code>u</code> vector and <code>p</code> vector, insert the product vector to the hidden layer can lead to more complicated feature interaction.</p>
+<h3 id="pnn">PNN</h3>
+<p><img src="/content/csdn/recsys3.png" alt=""></p>
+<p>The first layer is an embedding layer, which converts the sparse categorical features into dense embeddings. Then there are two ways of feature interactions in the <code>product layer</code>. They are <strong>inner product</strong> and <strong>outer product</strong>, namely $f _i f _j ^T$. However, the output of outer product must be a matrix rather than a scalar like inner product. So a dimension reduction is applied to outer production:</p>
+<p>$$ p = \sum_{i=1}^{M}\sum_{j=1}^{M}f_if_j^T = f_{\Sigma} f_\Sigma^T, \ \ \ f_\Sigma = \sum f_i $$
+This operation can be interpreted as a kind of average pooling.</p>
+<p>Then two parallel fully-connected layers are used to map output from inner product and output from outer product into two vectors with the same dimension. And after that, these two vectors get concatenated and fed into the top MLPs.</p>
+<p>Attention: in practice, average pooling should be used only within the same feature filed, because embedding vectors from different fields don&rsquo;t share the same linear space.</p>
+<h3 id="wide--deep">Wide &amp; Deep</h3>
+<p><img src="/content/csdn/recsys4.png" alt=""></p>
+<p>W&amp;D model is able to merge different types of features. Numeric features can be directly input into fully-connected layer, while categorical features will first go through the embedding layer. Numeric features and embeddings are stacked together and fed into the <code>Deep</code> module on the right. The <code>Wide</code> module on the left handles the feature interaction via</p>
+<p>$$ \phi_k(x) = \prod_{i=1}^d x_i^{c_{ik}},\ c_{ik}=1,\ 0$$</p>
+<p>where $c_{ki}$ is a boolean variable that is 1 if the i-th feature is part of the k-th transformation $\phi _k$, and 0 otherwise. Then <code>Wide</code> concatenate all transformations to a vector $\phi(\mathbf x)$. The final output is formulated as:</p>
+<p>$$ P(Y=1 | \mathbf{x})=\sigma\left(\mathbf{w}_{\text {wide}}^{T}[\mathbf{x}, \phi(\mathbf{x})]+\mathbf{w} _{\text {deep}}^{T} a^{\left(l _{f}\right)}+b\right) $$</p>
+<p>Why Wide&amp;Deep is successful:</p>
+<ul>
+<li>The combination of <strong>memorization</strong> from Wide module and <strong>generalization</strong> from Deep module.</li>
+</ul>
+<h3 id="deepfm">DeepFM</h3>
+<p>Due to the fact that the interaction transformations of Wide part are manually designed, FM is put forward to replace the Wide module. Here comes DeepFM.</p>
+<p><img src="/content/csdn/recsys5.png" alt=""></p>
+<p>Then the output of Wide part becomes:</p>
+<p>$$ y_{FM} = \langle w, x \rangle + \sum_{i=1}^n\sum_{j=i+1}^n \langle V_i, V_j \rangle x_i x_j $$</p>
+<h3 id="din">DIN</h3>
+<p>DIN is an application of attention mechanism in recommendation systems. It is inspired by the idea that some features play much more important roles in CTR prediction than the others. For example, users who have bought a mouse are more likely to click on an ad about keyboards. Attention is useful for automatically allocating importance weights to different features.</p>
+<p>$$ V_u = \sum_{i=1}^N g(V_i, V_a) V_i$$</p>
+<p>where $V_u$ is the embedding for user <code>u</code> and $V_a$ is the embedding for item <code>a</code>. $V_i$ is the embedding of user <code>u</code>'s i-th action. The attention score is attained from a MLP with the input of $[V _i, V _i - V _a, V _a]$.</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/recommendation_system/">recommendation_system</a>
+          <a href="/tags/machine_learning/">machine_learning</a>
+          <a href="/tags/deep_learning/">deep_learning</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/cv-search-engine/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">A Search Engine for Academic Computer Vision Papers</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/logic-reasoning/">
+            <span class="next-text nav-default">A Survey on Logic Reasoning in Text Mining</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
