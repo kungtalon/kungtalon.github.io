@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>A Search Engine for Academic Computer Vision Papers - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang, Yang Ye" /><meta name="description" content="We proposed a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this link. Full code is available on our Github." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/cv-search-engine/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.cf182d97ad4a726b57eda4db6a961beb5f2bd47cefbfacf9f1d626995e1124e8.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="A Search Engine for Academic Computer Vision Papers" />
+<meta property="og:description" content="We proposed a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this link. Full code is available on our Github." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/cv-search-engine/" />
+<meta property="article:published_time" content="2021-12-10T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-12-10T00:00:00+00:00" />
+<meta itemprop="name" content="A Search Engine for Academic Computer Vision Papers">
+<meta itemprop="description" content="We proposed a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this link. Full code is available on our Github.">
+<meta itemprop="datePublished" content="2021-12-10T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-12-10T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1811">
+
+
+
+<meta itemprop="keywords" content="machine_learning,deep_learning,NLP,information_retrieval," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A Search Engine for Academic Computer Vision Papers"/>
+<meta name="twitter:description" content="We proposed a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this link. Full code is available on our Github."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">A Search Engine for Academic Computer Vision Papers</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-12-10 </span>
+        <div class="post-category">
+            <a href="/categories/machine_learning/"> machine_learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#1-introduction">1. Introduction</a></li>
+        <li><a href="#2-data">2. Data</a></li>
+        <li><a href="#3-methods">3. Methods</a>
+          <ul>
+            <li><a href="#31-word2vec">3.1 Word2Vec</a></li>
+            <li><a href="#32-preparing-the-features">3.2 Preparing the features</a></li>
+            <li><a href="#33-learn-to-rank-with-lightgbm">3.3 Learn-to-rank with LightGBM</a></li>
+          </ul>
+        </li>
+        <li><a href="#4-results-and-discussions">4. Results and Discussions</a></li>
+        <li><a href="#5-whats-next">5. What&rsquo;s Next</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="1-introduction">1. Introduction</h2>
+<p>With the development of artificial intelligence, thousands of papers are published every year. How to manage all these papers becomes a challenge. Besides, to better utilize these precious research results, how can we build a search engine that can help us find related work quickly and precisely?</p>
+<p>One big success is the well-known ArXiv, which is a free distribution service and an open-access archive for 1,968,218 scholarly articles in the fields of physics, computer science, statistics, electrical engineering and so on. Undoubtedly, it is a great thing that people can find most of the papers they want on such a paper search engine, but it can be improved in many aspects.
+First, ArXiv is sensitive to typo. Even if you capitalize or forget to capitalize a certain letter, you might fail to find desired results.</p>
+<p>Second, the searching algorithm in ArXiv is not intelligent enough to understand your query. For instance, if you have just started your journey in computer vision and want to know more about the famous &ldquo;ResNet&rdquo;, you cannot find the paper if you search for &ldquo;Residual networks&rdquo;. Instead, the title for that paper is &ldquo;Deep Residual Learning for Image Recognition&rdquo;.</p>
+<p>Third, during paper review, researchers need to search for a specific topic or method. For experienced researchers, these might not be problems, but beginners need a more friendly platform.</p>
+<p>Based on the reasons above, we aim to design a search engine for searching academic papers.</p>
+<ul>
+<li>It should be friendly to users who are not very experienced in computer vision, such as students.</li>
+<li>Users can search for specific topic or method, such as &lsquo;Transformer&rsquo;, &lsquo;Bert&rsquo;, &lsquo;MLP-Mixer&rsquo;, and obtain relevant papers which use these methods.</li>
+<li>It is robust to small typo problems. For instance, if a user types &ldquo;RexNet&rdquo;, the search engine will still find papers related to &ldquo;ResNet&rdquo;.</li>
+</ul>
+<p>We built the search engine through a learn-to-rank model trained by lightGBM (also LGBM), which is a powerful machine learning model frequently used for classification and ranking. Our model takes multiple features as input and outputs a list of papers with high relevance scores.</p>
+<hr>
+<h2 id="2-data">2. Data</h2>
+<p>Before comming to the step of model building, we have to obtain a well-labeled dataset for this specific task.</p>
+<p>We choose papers that are published on Conference on Computer Vision and Pattern Recognition (CVPR) and International Conference on Computer Vision (ICCV) as our data. CVPR is an annual conference on computer vision and pattern recognition, which is regarded as one of the most important conferences in its field. ICCV is another top conference in computer vision and is held every two years. We choose CVPR and ICCV as our domain because many outstanding papers are published on them.</p>
+<p>Selenium is a convenient autonomous crawler in Python. With Selenium, we obtained approximately 15,000 papers published in CVPR and ICCV from 2015 to 2021. Each paper can be treated as a document, which consists of title, authors, abstract, LaTex version, publised year, whether it is in the workshop and whether it has supplementary material. And we use regular expressions to extract the subsections from the latex. The obtained data are stored in Pandas DataFrame.</p>
+<div align=center>
+<img src="https://cdn-images-1.medium.com/max/800/1*Jhf_20CBYAm-mwkstSiBlA.png"/>
+<p>An example of our crawled papers</p>
+</div>
+<p>The next step is to select several queries and annotate the relevance between the queries and some candidate documents. The candidates are first retrieved by classical methods like BM25. We scored the relevance from 5 (very high relevance) to 1 (very low relevance) and seperated the dataset into training data (40 queries), validation data (10 queries) and test data (10 queries).</p>
+<hr>
+<h2 id="3-methods">3. Methods</h2>
+<p>Initially, we use <a href="https://pyterrier.readthedocs.io/en/latest/">PyTerrier</a> to index the documents and retrieve 50 papers with top relevance. And then learn-to-rank model will be applied to reranking these papers.</p>
+<h3 id="31-word2vec">3.1 Word2Vec</h3>
+<p><a href="https://github.com/RaRe-Technologies/gensim">Gensim</a> is a useful library when it comes to mapping each word into a semantic vector, which is called the embedding vector. After turning words into embeddings, words with similar meanings with have similar embeddings.</p>
+<div align="center">
+<img src="https://cdn-images-1.medium.com/max/800/0*Ri2A787ZiMR2LvF0.png"/>
+<p>The concept of embedding</p>
+</div>
+<p>To put all the text data into the Word2vec model, we have to parse the texts into lists of strings. <a href="https://www.nltk.org/">NLTK</a> can help transform a bunch of long texts into short lists of tokens.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">nltk.tokenize</span> <span class="kn">import</span> <span class="n">RegexpTokenizer</span>
+<span class="kn">from</span> <span class="nn">nltk.corpus</span> <span class="kn">import</span> <span class="n">stopwords</span>
+<span class="kn">from</span> <span class="nn">nltk.stem</span> <span class="kn">import</span> <span class="n">PorterStemmer</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">RegexpTokenizer</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\w+&#39;</span><span class="p">)</span>
+<span class="n">ps</span> <span class="o">=</span> <span class="n">PorterStemmer</span><span class="p">()</span>
+<span class="n">stops</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">stopwords</span><span class="o">.</span><span class="n">words</span><span class="p">(</span><span class="s1">&#39;english&#39;</span><span class="p">))</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;abstract_tokens&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;abstract&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">s</span><span class="p">:</span> <span class="p">[</span><span class="n">ps</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">t</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">tokenize</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">if</span> <span class="n">t</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stops</span><span class="p">])</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>After applying preprocessing functions to all of our text fields, we can merge all fields to get a training corpus, with which Word2vec model can learn the relations between words. Here we choose the embedding size to be 256.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">corpus</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;abstract_token&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;subsections_token&#39;</span><span class="p">])</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;title_token&#39;</span><span class="p">])</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">Word2Vec</span><span class="p">(</span><span class="n">sentences</span><span class="o">=</span><span class="n">corpus</span><span class="p">,</span> <span class="n">vector_size</span><span class="o">=</span><span class="mi">256</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">min_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">epochs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Then, this model can be used to generate embeddings for all words in the vocabulary. But to get an embedding for an abstract, we need to sum up all the embeddings of words in this abstract. For queries, it is the same thing. Embeddings of documents are pre-calculated while the embedding for queries are generated on-the-fly.</p>
+<h3 id="32-preparing-the-features">3.2 Preparing the features</h3>
+<p>For each pair of query and document, we join the metadata with the pairs and start extract the features which can measure the relations between the query and the documents or some characteristics about the documents.</p>
+<p>We defined four types of features for this task:</p>
+<ol>
+<li>Similarity between the query embedding and the documentem beddings. We included three types of &ldquo;distances&rdquo;: inner product, cosine similarity and Euclidean distance</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">_cal_embedding_dists</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc_data</span><span class="p">):</span>
+    <span class="n">series</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;dot&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+        <span class="s1">&#39;cos&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">+</span> <span class="mf">1e-9</span><span class="p">),</span>
+        <span class="s1">&#39;euclidean&#39;</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">doc_data</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+        <span class="n">cur_dists</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">query_embedding</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">query_embeddings_dict</span><span class="p">[</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;qid&#39;</span><span class="p">]]</span>
+        <span class="k">for</span> <span class="n">field</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">,</span> <span class="s1">&#39;subsections&#39;</span><span class="p">]:</span>
+            <span class="n">dists</span> <span class="o">=</span> <span class="p">[</span><span class="n">dist_func</span><span class="p">(</span><span class="n">query_embedding</span><span class="p">,</span> <span class="n">row</span><span class="p">[</span><span class="n">field</span> <span class="o">+</span> <span class="s1">&#39;_embedding&#39;</span><span class="p">])</span> <span class="k">for</span> <span class="n">dist_func</span> <span class="ow">in</span> <span class="n">distances</span><span class="o">.</span><span class="n">values</span><span class="p">()]</span>
+            <span class="n">cur_dists</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">dists</span><span class="p">)</span>
+        <span class="n">series</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">cur_dists</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">series</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="2">
+<li>Relevance score given by PyTerrier. We have adopted the methods of TF-IDF, BM25, CoordinatMatch to score the texts.</li>
+<li>Some basic attributes of the documents, such as the year, the conference, whether it comes from a workshop and whether it has supplementary materials.</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="kn">as</span> <span class="nn">pt</span>
+<span class="k">def</span> <span class="nf">_get_doc_property</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># publish time, conference, is_workshop, has_supp ... </span>
+    <span class="n">pipeline</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">doc_score</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&#34;year&#34;</span><span class="p">])))</span>
+        <span class="o">**</span>
+        <span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">doc_score</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&#34;conference&#34;</span><span class="p">]</span><span class="o">==</span><span class="s2">&#34;CVPR&#34;</span><span class="p">)))</span>  <span class="c1">#CVPR:1,ICCV:0</span>
+        <span class="o">**</span>
+        <span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">doc_score</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&#34;workshop&#34;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;&#39;</span><span class="p">)))</span>
+        <span class="o">**</span>
+        <span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">doc_score</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s2">&#34;supp_link&#34;</span><span class="p">]</span><span class="o">!=</span><span class="s1">&#39;&#39;</span><span class="p">)))</span>
+        <span class="o">**</span>
+        <span class="p">(</span><span class="n">pt</span><span class="o">.</span><span class="n">apply</span><span class="o">.</span><span class="n">doc_score</span><span class="p">(</span><span class="k">lambda</span> <span class="n">row</span><span class="p">:</span> <span class="n">row</span><span class="p">[</span><span class="s1">&#39;score&#39;</span><span class="p">]))</span>
+    <span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">)[</span><span class="s1">&#39;features&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">res</span>
+</code></pre></td></tr></table>
+</div>
+</div><ol start="4">
+<li>Whether part of the query matches the author names.</li>
+</ol>
+<h3 id="33-learn-to-rank-with-lightgbm">3.3 Learn-to-rank with LightGBM</h3>
+<p>The library of <a href="https://lightgbm.readthedocs.io/en/latest/index.html">lightgbm</a> is a well-written, open-source library in Python based on <a href="https://scikit-learn.org/stable/">Scikit-Learn</a>. So we can easily use this library to train our model with sklearn APIs. Also, this class has implemented a version for listwise ranking, which is most suited for our task of learning to rank. For training, we directly use the annotated relevance from 1 to 5 as the target label and fit the model using the features extracted and the corresponding labels.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">lgb</span><span class="o">.</span><span class="n">LGBMRanker</span><span class="p">(</span>
+    <span class="n">task</span><span class="o">=</span><span class="s2">&#34;train&#34;</span><span class="p">,</span>
+    <span class="n">silent</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">min_child_samples</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">num_leaves</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span>
+    <span class="n">max_depth</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">objective</span><span class="o">=</span><span class="s2">&#34;lambdarank&#34;</span><span class="p">,</span>
+    <span class="n">metric</span><span class="o">=</span><span class="s2">&#34;ndcg&#34;</span><span class="p">,</span>
+    <span class="n">learning_rate</span><span class="o">=</span> <span class="mf">0.064</span><span class="p">,</span>
+    <span class="n">importance_type</span><span class="o">=</span><span class="s2">&#34;gain&#34;</span><span class="p">,</span>
+    <span class="n">num_iterations</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span>
+    <span class="n">subsample</span><span class="o">=</span><span class="mf">0.8</span>
+<span class="p">)</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span>
+    <span class="n">train_feats</span><span class="p">,</span>
+    <span class="n">train_labels</span><span class="p">,</span>
+    <span class="n">group</span><span class="o">=</span><span class="n">train_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;qid&#39;</span><span class="p">)[</span><span class="s1">&#39;qid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span>
+    <span class="n">eval_set</span><span class="o">=</span><span class="p">[(</span><span class="n">val_feats</span><span class="p">,</span><span class="n">val_labels</span><span class="p">)],</span>
+    <span class="n">eval_group</span><span class="o">=</span><span class="p">[</span><span class="n">val_features</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;qid&#39;</span><span class="p">)[</span><span class="s1">&#39;qid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()],</span>
+    <span class="n">eval_at</span><span class="o">=</span><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">],</span>
+    <span class="n">eval_metric</span><span class="o">=</span><span class="s1">&#39;ndcg&#39;</span>
+<span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4-results-and-discussions">4. Results and Discussions</h2>
+<p>First, let&rsquo;s introduce the metric used in our project. nDCG is a type of weighted sum of relevance scores of a sorted list of retrieved documents.</p>
+<div align="center">
+<img src="https://cdn-images-1.medium.com/max/800/1*tQolkMu38lgpy--GVPEFIQ.png"/>
+</div>
+<p>where relᵢ is the relevance score of the i-th document, and iDCG is the maximum possible DCG score when the order becomes the ideal order. This metric attaches more importance to the correct ranking of top-k results.</p>
+<p>Then let&rsquo;s compare our list-wise LGBM with other baselines we have mentioned above.</p>
+<div align="center">
+<img src="https://cdn-images-1.medium.com/max/1200/1*bhjPuRzyHRkWF8F9Fwcwbg.png" width="1000"/>
+</div>
+<p>The list-wise LGBM outperforms other models.From the figure, we can see that listwise LGBM model works best, while pointwise LGBM and logistic regression cannot exceed BM25. The result is close to what we expect.</p>
+<p>LGBM is a boosting algorithm, but logistic regression is a single model. Therefore, it is reasonable that aggregation of different models work better than a single model. Besides, LGBM is able to fit non-linear features, while, as a generalized linear model, logistic regression cannot fit non-linear features well.</p>
+<p>The reason why listwise model works better than pointwise model is that listwise model can simultaneously learn both the relations between queries and documents and the relations among different documents given the same query. The essence of reranking is to re-permute the documents. Thus, the score is not the key, but the ordering is. Pointwise model focuses on predicting a score for each sample, but neglect the relation among different samples.</p>
+<p>To make more sense of how our model works, we are wondering what features play important role in our model, and the tool to find that out is feature importance. Usual methods include linear regression and tree-based methods. Considering our model LightGBM is based on decision trees, we can easily acquire the importance of each feature.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">plot_importance</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">feat_names</span><span class="p">):</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">booster_</span><span class="o">.</span><span class="n">feature_importance</span><span class="p">()</span>
+    <span class="n">fi</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">feat_names</span><span class="p">),</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">values</span><span class="p">,</span> <span class="n">features</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">fi</span><span class="p">)</span>
+    
+    <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">values</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">features</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The number shows how many times that the feature has been used to split a node in decision trees of LGBM. The more times it is used, the more crucial the feature becomes.</p>
+<div align="center">
+<img src="https://cdn-images-1.medium.com/max/1200/1*uP4vgpLqG-9H9pKA-joCfA.png" width="900"/>
+<p>The ranking of feature importance of our LGBM model.</p>
+</div>
+<p>The ranking of feature importance in our LGBM model.In the picture, &ldquo;score&rdquo; is the weighted sum of BM25 scores of different parts of a document. The suffix &ldquo;s&rdquo; stands for subtitles, &ldquo;a&rdquo; for &ldquo;abstract&rdquo; and &ldquo;t&rdquo; for title. We can get that the most important features are BM25 scores and innerproducts of embeddings, which agrees with our expectation.</p>
+<hr>
+<h2 id="5-whats-next">5. What&rsquo;s Next</h2>
+<p>There are some possible improvements in our future work.</p>
+<ol>
+<li><strong>More Powerful Models</strong>. Tree-based algorithm divides data into bins, which may lose accuracy when dealing with contiguous variables. Large language models based on deep neural networks like BERT probably work better.</li>
+<li><strong>Query Design</strong>. Our queries might be subjective. We cannot design queries that are related to unfamiliar computer vision topics. An objective way is to refer to some overview papers that divide computer vision into different fields. Then, we can design queries that cover all the fields.</li>
+<li><strong>Annotation</strong>. The distributions of scores labeled by two members are different, which might be a potential problem. We may need to design a rigorous rule of labeling.</li>
+<li><strong>More Data Sources</strong>. We can include more computer vision conferences, such as ECCV, into our database.</li>
+<li><strong>Sampling</strong>. Negative sampling is a good way of data augmentation. And it is also a good way to balance the labels if low-relevance samples are under-represented.</li>
+</ol>
+<hr>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/machine_learning/">machine_learning</a>
+          <a href="/tags/deep_learning/">deep_learning</a>
+          <a href="/tags/nlp/">NLP</a>
+          <a href="/tags/information_retrieval/">information_retrieval</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/algorithms-on-graphs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">Algorithms on Graphs</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/logic-reasoning/">
+            <span class="next-text nav-default">A Survey on Logic Reasoning in Text Mining</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
