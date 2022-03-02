@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>All About AUC - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="The definition, equivalent form and calculation of AUC." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/auc/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.c33e27216e3166d7ed7d0d02a2fed00f03035a3167f342addb62f3f9ede7ae32.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="All About AUC" />
+<meta property="og:description" content="The definition, equivalent form and calculation of AUC." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/auc/" />
+<meta property="article:published_time" content="2021-02-24T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-02-24T00:00:00+00:00" />
+<meta itemprop="name" content="All About AUC">
+<meta itemprop="description" content="The definition, equivalent form and calculation of AUC.">
+<meta itemprop="datePublished" content="2021-02-24T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-02-24T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1093">
+
+
+
+<meta itemprop="keywords" content="machine_learning,information_retrieval,recommendation_system,my_projects," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="All About AUC"/>
+<meta name="twitter:description" content="The definition, equivalent form and calculation of AUC."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">All About AUC</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-02-24 </span>
+        <div class="post-category">
+            <a href="/categories/machine_learning/"> machine_learning </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#definition">Definition</a></li>
+        <li><a href="#calculation">Calculation</a>
+          <ul>
+            <li><a href="#1-calculation-by-area">1. Calculation by Area</a></li>
+            <li><a href="#2-calculation-by-reverse-pairs">2. Calculation by Reverse Pairs</a></li>
+          </ul>
+        </li>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="definition">Definition</h2>
+<p>A formal definition of AUC is:
+$$AUC=P(f(x)&gt;f(y)),\ x\sim \mathcal D _{+}, y\sim \mathcal D _{-}$$</p>
+<p>where $D _+$ is the set of positive samples, and $D _-$ is the set of negative samples. Therefore, the metric of AUC can be interpreted as &ldquo;the probability that a positive sample is wrongly ranked ahead of a negative sample&rdquo;. Therefore, AUC can naturally measure the performance of a binary classification model and is thus widely used in evaluating recommendation systems.</p>
+<div class="note">
+<strong>Note</strong> 
+<p>Based on the definition, AUC seems to be suited for evaluating algorithms associated with ranking documents, just like search engines. However, search engines pay more attention to the top-k results than the others while AUC pays equal attention to all the results. NDCG, which is a weighted relevance metric, is better at ranking documents.</p>
+</div>
+<p>While in machine learning related classes, we are often told that AUC stands for the <code>Area Under the Curve</code>, where the curve refers to the ROC Curve. First, let me introduce the ROC Curve - the curve showing the relation between True Positive Rate (TPR) and False Positive Rate (FPR):</p>
+<p>$$ TPR = \frac{TP}{TP+FN} $$</p>
+<p>$$ FPR = \frac{FP}{FP+TN} $$</p>
+<p>Given any threshold $t$ in $[0,1]$, we determine whether a sample is predicted as positive by checking if $f(x) &gt; t$, and then we can derive the corresponding $TPR(t)$ and $FPR(t)$ as functions of $t$. With this parameter $t$, we can easily draw the ROC Curve.</p>
+<p align="center">
+  <img src="/roc.png"/>
+</p>
+<p>Here is a mathematical proof about the relation between the probability definition and the area definition of AUC:</p>
+<blockquote>
+<p>Let $s_+$ and $s_-$ be the score of a random positive/negative sample. Consider the probability that the $s_-$ lies between $[t, t+\Delta t]$: $$\begin{aligned}
+&amp; P\left(t \leq s_{-}&lt;t+\Delta t\right) \\<br>
+=&amp; P\left(s_{-}&gt;t\right)-P\left(s_{-}&gt;t+\Delta t\right) \\<br>
+=&amp; \frac{N_{-}(t)-N_{-}(t+\Delta t)}{N_{-}} \\<br>
+=&amp; FPR(t)-FPR(t+\Delta t)=-\Delta FPR(t)
+\end{aligned}$$
+Suppose $\Delta t$ is sufficiently small, then the conditional probability that $s_+$ is bigger than $s_-$ is
+$$ \begin{aligned}
+&amp;P\left(s_{+}&gt;s_{-} \mid t \leq s_{-}&lt;t+\Delta t\right) \\<br>
+&amp;\approx P\left(s_{+}&gt;t\right)=\frac{\text{# of pos samples predicted as pos}}{\text{# of pos samples}}\\<br>
+&amp;=\frac{TP(t)}{P}=TPR(t)
+\end{aligned} $$
+Then, $$\begin{aligned}
+&amp; P\left(s_{+}&gt;s_{-}\right) \\<br>
+=&amp; \sum_t P\left (t \leq s_{-}&lt;t+\Delta t\right) P\left(s_{+}&gt;s_{-} \mid t \leq s_{-}&lt;t+\Delta t\right) \\<br>
+=&amp;-\sum_{t} TPR(t) \Delta FPR(t) \\<br>
+=&amp;-\int_{t=-\infty}^{\infty} TPR(t) d FPR(t) \\<br>
+=&amp; \int_{t=\infty}^{-\infty} TPR(t) d FPR(t)
+\end{aligned}$$</p>
+<ul>
+<li>Why do we interchange the limits in the last step? It&rsquo;s because $FPR(t)$ decreases when $t$ goes up. We want the x-axis to be increasing and thus $t$ must be decreasing.</li>
+</ul>
+</blockquote>
+<p>Therefore, the two definitions are completely equivalent. Though, the area definition is more intuitive and more often talked about.</p>
+<h2 id="calculation">Calculation</h2>
+<p>Based on the two types of definition, how do we use Python or SQL to calculate the AUC if we are given the labels and predicted scores of samples?</p>
+<h3 id="1-calculation-by-area">1. Calculation by Area</h3>
+<p>Based on the area definition, we can divide the x-axis into lots of small intervals and use trapeziums to approximate the area.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">calcAUC_by_area</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="n">probs</span><span class="p">):</span>
+    <span class="c1">###initialize</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">P</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">N</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">TP</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">FP</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">TPR_last</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">FPR_last</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">AUC</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pair</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="n">probs</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+    <span class="n">pair</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">pair</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pair</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">TP</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">FP</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="c1">### maybe have the same probs</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">pair</span><span class="p">)</span> <span class="ow">and</span> <span class="n">pair</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">pair</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pair</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+                <span class="n">TP</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">FP</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">TPR</span> <span class="o">=</span> <span class="n">TP</span> <span class="o">/</span> <span class="n">P</span>
+        <span class="n">FPR</span> <span class="o">=</span> <span class="n">FP</span> <span class="o">/</span> <span class="n">N</span>
+        <span class="n">AUC</span> <span class="o">+=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">TPR</span> <span class="o">+</span> <span class="n">TPR_last</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">FPR</span> <span class="o">-</span> <span class="n">FPR_last</span><span class="p">)</span>    <span class="c1">## area equation for trapezium</span>
+        <span class="n">TPR_last</span> <span class="o">=</span> <span class="n">TPR</span>
+        <span class="n">FPR_last</span> <span class="o">=</span> <span class="n">FPR</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">AUC</span>
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="2-calculation-by-reverse-pairs">2. Calculation by Reverse Pairs</h3>
+<p>How do you estimate the probability that a positive sample ranks higher than a negative sample? A very intuitive solution may be</p>
+<p>$$ \frac{\text{# pair of samples such that $f(a) &gt; f(b)$ and $label(a) &gt; label(b)$}}{\text{# pair of samples}} $$</p>
+<p>And it can be proved that this is actually a maximum likelihood estimator. Therefore, the algorithm is like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">calcAUC_by_prob</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">probs</span><span class="p">):</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">P</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">neg_prob</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">pos_prob</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">labels</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">label</span> <span class="o">==</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">P</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">pos_prob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">N</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">neg_prob</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">probs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+    <span class="n">number</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">pos</span> <span class="ow">in</span> <span class="n">pos_prob</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">neg</span> <span class="ow">in</span> <span class="n">neg_prob</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">pos</span> <span class="o">&gt;</span> <span class="n">neg</span><span class="p">):</span>
+                <span class="n">number</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="p">(</span><span class="n">pos</span> <span class="o">==</span> <span class="n">neg</span><span class="p">):</span>
+                <span class="n">number</span> <span class="o">+=</span> <span class="mf">0.5</span>
+    <span class="k">return</span> <span class="n">number</span> <span class="o">/</span> <span class="p">(</span><span class="n">N</span> <span class="o">*</span> <span class="n">P</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>However, this implementation is not satisfactory due to its two layers of for-loops, which accounts for $O(n^2)$ time complexity.</p>
+<p>Actually, we can sort the samples with regard to its prediction value in ascending order, and then find the number of <code>reverse pairs</code> (namely $i &lt; j$ $\land$ $nums[i] &gt; numsj$). Therefore, a MergeSort based algorithm can reduce the time complexity to $O(n\log n)$.</p>
+<p>Another idea is from the reference blog. Let&rsquo;s consider a random positive sample. Assume that it is ranked j-th among all positive samples. Then there are $j-1$ positive samples before it. And assume that its ranking among all samples is $r_j$. Then there are $r_j - j$ negative samples before it. So, the probability that another random negative sample lies before this positive sample is $(r_j - j)/N_-$, where $N_-$ is the number of negative samples. Given this, let&rsquo;s average the probability over all $j$:</p>
+<p>$$ AUC = \frac{1}{N_{+}} \sum_{j=1}^{N_{+}}\left(r_{j}-j\right) / N_{-}=\frac{\sum_{j=1}^{N_{+}} r_{j}-N_{+}\left(N_{+}+1\right) / 2}{N_{+} N_{-}}$$</p>
+<p>The implementation becomes:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">calAUC</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span><span class="n">prob</span><span class="p">):</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span><span class="n">labels</span><span class="p">))</span>
+    <span class="n">rank</span> <span class="o">=</span> <span class="p">[</span><span class="n">values2</span> <span class="k">for</span> <span class="n">values1</span><span class="p">,</span><span class="n">values2</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
+    <span class="n">rankList</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rank</span><span class="p">))</span> <span class="k">if</span> <span class="n">rank</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">posNum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">negNum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">labels</span><span class="p">)):</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">==</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">posNum</span><span class="o">+=</span><span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">negNum</span><span class="o">+=</span><span class="mi">1</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">auc</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">rankList</span><span class="p">)</span><span class="o">-</span> <span class="p">(</span><span class="n">posNum</span><span class="o">*</span><span class="p">(</span><span class="n">posNum</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">posNum</span><span class="o">*</span><span class="n">negNum</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">auc</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">auc</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>There is another way of implementing this calculation in SQL:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-sql" data-lang="sql"><span class="k">select</span>
+  <span class="p">(</span><span class="n">ry</span> <span class="o">-</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="o">*</span><span class="n">n1</span><span class="o">*</span><span class="p">(</span><span class="n">n1</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="o">/</span><span class="n">n0</span><span class="o">/</span><span class="n">n1</span> <span class="k">as</span> <span class="n">auc</span>
+<span class="k">from</span><span class="p">(</span>
+  <span class="k">select</span>
+    <span class="k">sum</span><span class="p">(</span><span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">n0</span><span class="p">,</span>
+    <span class="k">sum</span><span class="p">(</span><span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">n1</span><span class="p">,</span>
+    <span class="k">sum</span><span class="p">(</span><span class="k">if</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span> <span class="k">as</span> <span class="n">ry</span>
+  <span class="k">from</span><span class="p">(</span>
+    <span class="k">select</span> <span class="n">y</span><span class="p">,</span> <span class="n">row_number</span><span class="p">()</span> <span class="n">over</span><span class="p">(</span><span class="k">order</span> <span class="k">by</span> <span class="n">score</span> <span class="k">asc</span><span class="p">)</span> <span class="k">as</span> <span class="n">r</span>
+    <span class="k">from</span><span class="p">(</span>
+      <span class="k">select</span> <span class="n">y</span><span class="p">,</span> <span class="n">score</span>
+      <span class="k">from</span> <span class="k">some</span><span class="p">.</span><span class="k">table</span>
+    <span class="p">)</span><span class="n">A</span>
+  <span class="p">)</span><span class="n">B</span>
+<span class="p">)</span><span class="k">C</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="reference">Reference</h2>
+<p>[1] <a href="https://tracholar.github.io/machine-learning/2018/01/26/auc.html">https://tracholar.github.io/machine-learning/2018/01/26/auc.html</a></p>
+<p>[2] <a href="https://en.wikipedia.org/wiki/Receiver_operating_characteristic">https://en.wikipedia.org/wiki/Receiver_operating_characteristic</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/machine_learning/">machine_learning</a>
+          <a href="/tags/information_retrieval/">information_retrieval</a>
+          <a href="/tags/recommendation_system/">recommendation_system</a>
+          <a href="/tags/my_projects/">my_projects</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/algorithms-on-graphs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[Leetcode] Algorithms on Graphs</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/intro-to-recommendation-system-algo/">
+            <span class="next-text nav-default">Evolvement of Recommendation System Algorithms</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

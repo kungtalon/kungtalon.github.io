@@ -6,10 +6,19 @@
     <description>Recent content in recommendation_system on Zelong&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Thu, 25 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 24 Feb 2021 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kungtalon.github.io/tags/recommendation_system/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>All About AUC</title>
+      <link>https://kungtalon.github.io/post/auc/</link>
+      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/post/auc/</guid>
+      <description>The definition, equivalent form and calculation of AUC.</description>
+    </item>
     
     <item>
       <title>Evolvement of Recommendation System Algorithms</title>
