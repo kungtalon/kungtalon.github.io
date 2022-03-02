@@ -40,7 +40,7 @@
 
 
 
-<link href="/sass/main.min.cf182d97ad4a726b57eda4db6a961beb5f2bd47cefbfacf9f1d626995e1124e8.css" rel="stylesheet">
+<link href="/sass/main.min.5f9ca62d1e32c67058e33c3f98cbb3698d6e52632dfe6e6ad112a6ce740de8be.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -315,10 +315,10 @@ The computation of $q$ can be tricky. Direct enumeration, dynamic programming, G
 <li>Code reading&hellip;.</li>
 </ul>
 <h3 id="optimization">Optimization</h3>
-<p>$\left.\Theta_{v}, \Theta_{s} \leftarrow \arg \max _{\Theta_{v}, \Theta_{s}} \mathbb{E}_{P}\left[\operatorname{Pr}\left[A=\text { Executor(Perception }\left(S ; \Theta_{v}\right), P\right)\right]\right]$</p>
+<p>$$\left.\Theta_{v}, \Theta_{s} \leftarrow \arg \max _{\Theta_{v}, \Theta_{s}} \mathbb{E}_{P}\left[\operatorname{Pr}\left[A=\text { Executor(Perception }\left(S ; \Theta_{v}\right), P\right)\right]\right]$$</p>
 <ul>
-<li>$\Theta_v$ is the parameters in visual perception module (including attribute operators and concept embedding). gradient: $\left.\nabla_{\Theta_{v}} \mathbb{E}_{P}\left[D_{\mathrm{KL}}\left(\text { Executor (Perception }\left(S ; \Theta_{v}\right), P\right) | A\right)\right]$</li>
-<li>$\Theta_v$ is the parameters in sematic parsing module. REINFORCE: $r=1$ if the answer is correct otherwise 0. $\nabla_{\Theta_{s}}=\mathbb{E}_{P}[r \cdot \log \operatorname{Pr}[P=\text { SemanticParse }\left(Q ; \Theta_{s}\right)]]$. It is approximated via Monte Carlo.</li>
+<li>$\Theta_v$ is the parameters in visual perception module (including attribute operators and concept embedding). gradient: $$\left.\nabla_{\Theta_{v}} \mathbb{E}_{P}\left[D_{\mathrm{KL}}\left(\text { Executor (Perception }\left(S ; \Theta_{v}\right), P\right) | A\right)\right]$$</li>
+<li>$\Theta_v$ is the parameters in sematic parsing module. REINFORCE: $r=1$ if the answer is correct otherwise 0. $$\nabla_{\Theta_{s}}=\mathbb{E}_{P}[r \cdot \log \operatorname{Pr}[P=\text { SemanticParse }\left(Q ; \Theta_{s}\right)]]$$. It is approximated via Monte Carlo.</li>
 </ul>
 <h3 id="experiments">Experiments</h3>
 <p>How well the visual concepts are learned?</p>
@@ -496,7 +496,7 @@ $$</p>
 <ol>
 <li>
 <p>Semi-Supervised Learning:</p>
-<p>Train network with cross-entropy loss on labeled data,  and the DL2 encoding of constraints like $\left(p_{\text {people}}&lt;\epsilon \vee p_{\text {people}}&gt;1-\epsilon\right) \wedge \ldots \wedge\left(p_{\text {trees}}&lt;\epsilon \vee p_{\text {trees}}&gt;1-\epsilon\right)$ to force predictions into groups on unlabeled data.</p>
+<p>Train network with cross-entropy loss on labeled data,  and the DL2 encoding of constraints like $\left(p_{\text {people}}&lt;\epsilon \vee p_{\text {people}}&gt;1-\epsilon\right)$ $\wedge \ldots$ $\wedge\left(p_{\text {trees}}&lt;\epsilon \vee p_{\text {trees}}&gt;1-\epsilon\right)$ to force predictions into groups on unlabeled data.</p>
 </li>
 <li>
 <p>Unsupervised Learning:</p>

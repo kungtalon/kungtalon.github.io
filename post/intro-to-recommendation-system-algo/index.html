@@ -40,7 +40,7 @@
 
 
 
-<link href="/sass/main.min.cf182d97ad4a726b57eda4db6a961beb5f2bd47cefbfacf9f1d626995e1124e8.css" rel="stylesheet">
+<link href="/sass/main.min.5f9ca62d1e32c67058e33c3f98cbb3698d6e52632dfe6e6ad112a6ce740de8be.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
 
 
@@ -155,7 +155,7 @@
           <ul>
             <li><a href="#cf---collaborative-filtering">CF - Collaborative Filtering</a></li>
             <li><a href="#fm-factorization-machine">FM Factorization Machine</a></li>
-            <li><a href="#ffm">FFM:</a></li>
+            <li><a href="#ffm">FFM</a></li>
             <li><a href="#gbdtlr">GBDT+LR</a></li>
             <li><a href="#ls-plm">LS-PLM</a></li>
           </ul>
@@ -188,7 +188,7 @@ where $H$ is the set of products <code>u</code> has scored and $U_p$, $U_h$ are 
 </div>
 <h3 id="fm-factorization-machine">FM Factorization Machine</h3>
 <p>It is an improved version of logistic regression, which uses the product of embedding vectors $ \mathbf {w} _i^T \cdot \mathbf{w} _j $ to substitute the interaction term $w _{ij}$. This method reduces the parameters from $n^2$ to $nk$, where $k$ is the embedding dimension.</p>
-<h3 id="ffm">FFM:</h3>
+<h3 id="ffm">FFM</h3>
 <p>The concept of <code>field</code> is introduced based on FM. It is equivalent to split an original sparse features into $f$ sparse features (use $f$ different embeddings for the same sparse feature), where $f$ is the number of fields. For example, feature i and feature j belong to the field a, and feature k belongs to the field b. For the interaction term of feature i &amp; j, it is $\mathbf {w} _{ia} ^T \mathbf {w} _{ja}$, while the interaction term of feature i &amp; k is $\mathbf{w} _{ib}^T \mathbf{w} _{ka}$. The number of parameters is $knf$.</p>
 <h3 id="gbdtlr">GBDT+LR</h3>
 <p>For each subtree of GBDT, each input x will be assigned to a certain leaf node. Set this leaf node to 1, and set other leaf nodes to 0, and then we get a representation of this subtree, which looks like a binary vector. The feature vectors of the subtrees are concatenated to get a high-dimensional sparse vector, which is then passed to LR for CTR prediction.</p>
