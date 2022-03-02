@@ -169,7 +169,7 @@
       <h2 id="definition">Definition</h2>
 <p>A formal definition of AUC is:
 $$AUC=P(f(x)&gt;f(y)),\ x\sim \mathcal D _{+}, y\sim \mathcal D _{-}$$</p>
-<p>where $\mathcal D _+$ is the set of positive samples, and $\mathcal D _-$ is the set of negative samples. Therefore, the metric of AUC can be interpreted as &ldquo;the probability that a positive sample is wrongly ranked ahead of a negative sample&rdquo;. AUC can naturally measure the performance of a binary classification model and is thus widely used in evaluating recommendation systems. Also, its resistance against class imbalance is helpful when handling skewed data.</p>
+<p>where $\mathcal D _+$ is the set of positive samples, and $\mathcal D _-$ is the set of negative samples. Therefore, the metric of AUC can be interpreted as &ldquo;the probability that a positive sample is wrongly ranked ahead of a negative sample&rdquo;. AUC can naturally measure the performance of a binary classification model and is thus widely used in evaluating recommendation systems. Also, its <strong>resistance against class imbalance</strong> is helpful when handling skewed data.</p>
 <div class="note">
 <strong>Note</strong> 
 <p>Based on the definition, AUC seems to be suited for evaluating algorithms associated with ranking documents, just like search engines. However, search engines pay more attention to the top-k results than the others, while AUC pays equal attention to the results regardless of the absolute location. NDCG, which is a weighted relevance metric, is better at ranking documents.</p>
