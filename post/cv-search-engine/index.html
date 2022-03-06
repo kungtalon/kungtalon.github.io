@@ -191,7 +191,7 @@ First, ArXiv is sensitive to typo. Even if you capitalize or forget to capitaliz
 <img src="https://cdn-images-1.medium.com/max/800/1*Jhf_20CBYAm-mwkstSiBlA.png"/>
 <p>An example of our crawled papers</p>
 </div>
-<p>The next step is to select several queries and annotate the relevance between the queries and some candidate documents. The candidates are first retrieved by classical methods like BM25. We scored the relevance from 5 (very high relevance) to 1 (very low relevance) and seperated the dataset into training data (40 queries), validation data (10 queries) and test data (10 queries).</p>
+<p>The next step is to select several queries and annotate the relevance between the queries and some candidate documents. The candidates are first retrieved by classical methods like BM25. We scored the relevance from 5 (very high relevance) to 1 (very low relevance) and separated the dataset into training data (40 queries), validation data (10 queries) and test data (10 queries).</p>
 <hr>
 <h2 id="3-methods">3. Methods</h2>
 <p>Initially, we use <a href="https://pyterrier.readthedocs.io/en/latest/">PyTerrier</a> to index the documents and retrieve 50 papers with top relevance. And then learn-to-rank model will be applied to reranking these papers.</p>

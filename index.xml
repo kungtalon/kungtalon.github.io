@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>[Notes] HBase - Wide-Column Storage Database</title>
+      <link>https://kungtalon.github.io/post/hbase/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/post/hbase/</guid>
+      <description>HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&amp;hellip;</description>
+    </item>
+    
+    <item>
       <title>All About AUC</title>
       <link>https://kungtalon.github.io/post/auc/</link>
       <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>

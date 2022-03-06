@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>[Notes] HBase - Wide-Column Storage Database - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&amp;hellip;" /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/hbase/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.c33e27216e3166d7ed7d0d02a2fed00f03035a3167f342addb62f3f9ede7ae32.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="[Notes] HBase - Wide-Column Storage Database" />
+<meta property="og:description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&hellip;" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/hbase/" />
+<meta property="article:published_time" content="2021-04-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2021-04-27T00:00:00+00:00" />
+<meta itemprop="name" content="[Notes] HBase - Wide-Column Storage Database">
+<meta itemprop="description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&hellip;">
+<meta itemprop="datePublished" content="2021-04-27T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2021-04-27T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="621">
+
+
+
+<meta itemprop="keywords" content="big_data,distributed_system," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="[Notes] HBase - Wide-Column Storage Database"/>
+<meta name="twitter:description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&hellip;"/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">[Notes] HBase - Wide-Column Storage Database</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-04-27 </span>
+        <div class="post-category">
+            <a href="/categories/big_data/"> big_data </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#wide-column-databases-vs-relational-databases">Wide Column Databases vs Relational Databases</a></li>
+        <li><a href="#how-it-works">How It Works</a>
+          <ul>
+            <li><a href="#architecture">Architecture</a></li>
+            <li><a href="#storage-of-region-servers">Storage of Region Servers</a></li>
+            <li><a href="#meta-table">Meta Table</a></li>
+          </ul>
+        </li>
+        <li><a href="#reference">Reference</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="features">Features</h2>
+<p>HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables.</p>
+<p>HBase supports simple operations including insertion, searching and deletion, while joining between tables are beyond its scope. You can see HBase is a type of <strong>NoSQL</strong> database. There is only one datatype in HBase, which is byte array <code>byte[]</code>. HBase runs on top of Hadoop Distributed File System and relies on ZooKeeper for high-performance coordination.</p>
+<p>Each element in a HBase table can be identified with the tuple of column family, column qualifier, row key and timestamp version. Column families are the logical and physical grouping of columns. The row keys and timestamp versions are stored within each column family separately.</p>
+<div class="note">
+<strong>When do we need HBase?</strong>
+<p>Hbase is an open-source alternative of BigTable which is developed by Google. Google uses BigTable to store the newly generated websites, which contain a large portion of sparse data and require frequent insertion into the existing tables. Hence, the key words <code>sparse data</code> and <code>frequent insertion</code> totally reflect the advantage of HBase. Also, HBase is mainly used for development configuration, not in production scenarios.</p>
+</div>
+<p>Notice that with column family, column qualifier and row key, we can locate a <strong>cell</strong>, which contains multiple versions. Each version contains a value and a timestamp. If we view HBase as a mapping from (column family, column qualifier, row key, version) to data entries, HBase can function as a type of distributed Key-Value storage.</p>
+<h2 id="wide-column-databases-vs-relational-databases">Wide Column Databases vs Relational Databases</h2>
+<p>For relations databases, when we are going to read some records, it will load all columns of targeted records into a <code>page</code> (page is the unit of system I/O), causing that unwanted columns take up a lot of space in pages. However, for HBase, it first selects the needed columns and then searches row keys within those columns. The reading efficiency of wide-column database outperforms relational databases. Moreover, when we add a new column, the entire table in relational databases gets affected, while in HBase operations with respect to columns are independent from each other.</p>
+<p>There is another popular wide-column database called <strong>Cassandra</strong>. Learn more at <a href="https://www.scnsoft.com/blog/cassandra-vs-hbase">Cassandra-vs-HBase</a>.</p>
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="architecture">Architecture</h3>
+<div align=center>
+<img src="/content/hbase.png"/>
+</div>
+<p>HBase is made up of 3 main parts: HMaster, which assigns regions of data to the region server. Region Server, which handles requests from users for data input and output. ZooKeeper, which manages and tracks the data as it flows across region servers.</p>
+<p>The HMaster administrates and maintain the partition information of HBase systems, such as how a table is separated into different Regions and where can a client locate the Regions. HMaster is also responsible for load balancing for Regions.</p>
+<p>Region servers store and maintain the data assigned from HMaster. And they process the I/O instructions sent from clients.</p>
+<p>Clients never directly communicate with HMaster. When a client needs to know the location of a specific table, it sends a query to Zookeeper and gets the information about related Region servers.</p>
+<h3 id="storage-of-region-servers">Storage of Region Servers</h3>
+<p>For each HBase table, the rows are sorted by the dictionary order of row keys. The tables are partitioned into different Regions according to the row keys. So a Region can be defined by a range of row keys. Every Region has a unique RegionId. So a Region can globally located by a Region Key: <code>Table Name + Region Start Key + Region Id</code>.</p>
+<h3 id="meta-table">Meta Table</h3>
+<p>The <code>hbase::meta</code> table keeps a list of all Regions in the system and this <code>hbase:meta</code> is stored in a ZooKeeper ZNode. This meta table is a loop up table where client can find the server and region infos via the Region Key.</p>
+<h2 id="reference">Reference</h2>
+<p>[1] <a href="https://hbase.apache.org/book.html">https://hbase.apache.org/book.html</a></p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/big_data/">big_data</a>
+          <a href="/tags/distributed_system/">distributed_system</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/post/algorithms-on-graphs/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">[Leetcode] Algorithms on Graphs</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/post/auc/">
+            <span class="next-text nav-default">All About AUC</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
