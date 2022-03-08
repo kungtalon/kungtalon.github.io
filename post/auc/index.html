@@ -340,7 +340,7 @@ Then, $$\begin{aligned}
 </code></pre></td></tr></table>
 </div>
 </div><p>However, this implementation is not satisfactory due to its two layers of for-loops, which accounts for $O(n^2)$ time complexity.</p>
-<p>Actually, we can sort the samples with regard to its prediction value in ascending order, and then find the number of <code>reverse pairs</code> (namely $i &lt; j$ $\land$ $nums[i] &gt; numsj$). Therefore, a MergeSort based algorithm can reduce the time complexity to $O(n\log n)$.</p>
+<p>Actually, we can sort the samples with regard to its prediction value in ascending order, and then find the number of <code>reverse pairs</code> (namely $i &lt; j$ $\land$ $nums[i] &gt; nums[j]$). Therefore, a MergeSort based algorithm can reduce the time complexity to $O(n\log n)$.</p>
 <p>Another idea is from the reference blog. Let&rsquo;s consider a random positive sample. Assume that it is ranked j-th among all positive samples. Then there are $j-1$ positive samples before it. And assume that its ranking among all samples is $r_j$. Then there are $r_j - j$ negative samples before it. So, the probability that another random negative sample lies before this positive sample is $(r_j - j)/N_-$, where $N_-$ is the number of negative samples. Given this, let&rsquo;s average the probability over all $j$:</p>
 <p>$$ AUC = \frac{1}{N_{+}} \sum_{j=1}^{N_{+}}\left(r_{j}-j\right) / N_{-}=\frac{\sum_{j=1}^{N_{+}} r_{j}-N_{+}\left(N_{+}+1\right) / 2}{N_{+} N_{-}}$$</p>
 <p>The implementation becomes:</p>

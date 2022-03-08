@@ -58,7 +58,7 @@
 
 
 
-<meta itemprop="keywords" content="big_data,distributed_system," /><meta name="twitter:card" content="summary"/>
+<meta itemprop="keywords" content="big_data,distributed_system,DBMS," /><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="[Notes] HBase - Wide-Column Storage Database"/>
 <meta name="twitter:description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&hellip;"/>
 
@@ -185,7 +185,7 @@
 <div align=center>
 <img src="/content/hbase.png"/>
 </div>
-<p>HBase is made up of 3 main parts: HMaster, which assigns regions of data to the region server. Region Server, which handles requests from users for data input and output. ZooKeeper, which manages and tracks the data as it flows across region servers.</p>
+<p>HBase is made up of three main parts: HMaster, which assigns regions of data to the region server. Region Server, which handles requests from users for data input and output. ZooKeeper, which manages and tracks the data as it flows across region servers.</p>
 <p>The HMaster administrates and maintain the partition information of HBase systems, such as how a table is separated into different Regions and where can a client locate the Regions. HMaster is also responsible for load balancing for Regions.</p>
 <p>Region servers store and maintain the data assigned from HMaster. And they process the I/O instructions sent from clients.</p>
 <p>Clients never directly communicate with HMaster. When a client needs to know the location of a specific table, it sends a query to Zookeeper and gets the information about related Region servers.</p>
@@ -203,6 +203,7 @@
       <div class="post-tags">
           <a href="/tags/big_data/">big_data</a>
           <a href="/tags/distributed_system/">distributed_system</a>
+          <a href="/tags/dbms/">DBMS</a>
           </div>
       <nav class="post-nav">
         <a class="prev" href="/post/algorithms-on-graphs/">

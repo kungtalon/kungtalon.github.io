@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>DBMS on Zelong&#39;s Blog</title>
+    <link>https://kungtalon.github.io/tags/dbms/</link>
+    <description>Recent content in DBMS on Zelong&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <lastBuildDate>Tue, 27 Apr 2021 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="https://kungtalon.github.io/tags/dbms/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>[Notes] HBase - Wide-Column Storage Database</title>
+      <link>https://kungtalon.github.io/post/hbase/</link>
+      <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/post/hbase/</guid>
+      <description>HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&amp;hellip;</description>
+    </item>
+    
+  </channel>
+</rss>
