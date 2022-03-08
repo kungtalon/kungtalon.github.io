@@ -54,7 +54,7 @@
 <meta itemprop="description" content="HBase is a column storage database that can have many different columns, and it is allowed for columns to contain no values. So HBase is a good way of representing sparse tables&hellip;">
 <meta itemprop="datePublished" content="2021-04-27T00:00:00&#43;00:00" />
 <meta itemprop="dateModified" content="2021-04-27T00:00:00&#43;00:00" />
-<meta itemprop="wordCount" content="621">
+<meta itemprop="wordCount" content="624">
 
 
 
@@ -178,7 +178,7 @@
 </div>
 <p>Notice that with column family, column qualifier and row key, we can locate a <strong>cell</strong>, which contains multiple versions. Each version contains a value and a timestamp. If we view HBase as a mapping from (column family, column qualifier, row key, version) to data entries, HBase can function as a type of distributed Key-Value storage.</p>
 <h2 id="wide-column-databases-vs-relational-databases">Wide Column Databases vs Relational Databases</h2>
-<p>For relations databases, when we are going to read some records, it will load all columns of targeted records into a <code>page</code> (page is the unit of system I/O), causing that unwanted columns take up a lot of space in pages. However, for HBase, it first selects the needed columns and then searches row keys within those columns. The reading efficiency of wide-column database outperforms relational databases. Moreover, when we add a new column, the entire table in relational databases gets affected, while in HBase operations with respect to columns are independent from each other.</p>
+<p>For relations databases, when we are going to read some records, it will load all columns of targeted records into a <code>page</code> (page is the unit of system I/O), causing that unwanted columns take up a lot of space in pages. However, for HBase, it first selects the needed columns and then searches row keys within those columns. The reading efficiency of wide-column database outperforms relational databases. Moreover, when we add a new column, the entire table in relational databases gets affected, while in HBase operations with respect to a column only change rows associated with that column.</p>
 <p>There is another popular wide-column database called <strong>Cassandra</strong>. Learn more at <a href="https://www.scnsoft.com/blog/cassandra-vs-hbase">Cassandra-vs-HBase</a>.</p>
 <h2 id="how-it-works">How It Works</h2>
 <h3 id="architecture">Architecture</h3>
