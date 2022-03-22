@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Google Research: Differentiable Search Index - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="This paper from Google Research shows us how a Transformer can be utilized to &amp;ldquo;remember&amp;rdquo; the indexing of documents via a seq2seq fashion of training and decoding." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/google-dsi/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.19e7df9b55a3ba87e339cf3bbee73305abf41f42aebcff104c562d48d6d0ba75.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Google Research: Differentiable Search Index" />
+<meta property="og:description" content="This paper from Google Research shows us how a Transformer can be utilized to &ldquo;remember&rdquo; the indexing of documents via a seq2seq fashion of training and decoding." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/google-dsi/" />
+<meta property="article:published_time" content="2022-03-22T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-03-22T00:00:00+00:00" />
+<meta itemprop="name" content="Google Research: Differentiable Search Index">
+<meta itemprop="description" content="This paper from Google Research shows us how a Transformer can be utilized to &ldquo;remember&rdquo; the indexing of documents via a seq2seq fashion of training and decoding.">
+<meta itemprop="datePublished" content="2022-03-22T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-03-22T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="652">
+
+
+
+<meta itemprop="keywords" content="nlp,recommendation system,information retrieval," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Google Research: Differentiable Search Index"/>
+<meta name="twitter:description" content="This paper from Google Research shows us how a Transformer can be utilized to &ldquo;remember&rdquo; the indexing of documents via a seq2seq fashion of training and decoding."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Google Research: Differentiable Search Index</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-03-22 </span>
+        <div class="post-category">
+            <a href="/categories/recommendation-system/"> Recommendation System </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#introduction">Introduction</a></li>
+        <li><a href="#overall-strategies">Overall Strategies</a></li>
+        <li><a href="#structured-identifiers">Structured Identifiers</a></li>
+        <li><a href="#co-training-of-indexing-and-retrieval">Co-training of Indexing and Retrieval</a></li>
+        <li><a href="#other-settings">Other Settings</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p><img src="/content/google_dsi.jpg" alt=""></p>
+<h2 id="introduction">Introduction</h2>
+<p>Information Retrieval (IR) is an important technique that has laid the foundation of development of search engines and recommendation systems. For recommendation systems, it is crucial to retrieve a small pool of candidates from the vast amount of data before predicting the CTR/CVR of each item.</p>
+<p>Considering the most popular indexing methods, such as BM25 and Embedding-based Retrieval, the process is to convert the documents into vector space and during retrieval we try to find the document that best <u>matches</u> the query. Therefore, the complexity would always increase with the size of documents. Is there a method that we can store all information about the documents within one single model and map the query directly to the relevant documents with this model? This is the idea of one of Google&rsquo;s recent papers: Transformer Memory as a Differentiable Search Index (DSI). <a href="https://arxiv.org/abs/2202.06991">Arxiv Link</a></p>
+<h2 id="overall-strategies">Overall Strategies</h2>
+<p>With DSI, the processes of indexing and retrieval are unified. When indexing, we feed the embedded sequences of documents into the model and predict their ids. For retrieval, similarly, we input the embedded query to the model and it would predict the id of the closest candidate documents. Note that indexing and retrieval are both included in training process while only retrieval is performed during inference. There are many interesting designs to explore:</p>
+<h2 id="structured-identifiers">Structured Identifiers</h2>
+<p>Typically, we would randomly assign some integer id to each document as their unique identifier. Suppose we have $N$ documents. For prediction, we need to output a softmax vector with dimension of $N$ to represent the probability of each document. This softmax output layer has long been notorious for its awful computational cost.</p>
+<p>However, by using a string identifier, it is possible to view each identifier as a sequence (yes string itself is a type of array!). Suppose we use strings of 6 digits to identify each document. The inference of DSI model would consist of 6 time steps of prediction with each step predicting the probability of digits. Beam search is then naturally used here.</p>
+<p>To make the string id more meaningful, DSI proposes to cluster the document embeddings to several categories and assign the element of the document&rsquo;s string id according to the id of the clustered category. Just like the graph shows. It is obvious that if two ids share a long common prefix, then the two corresponding documents are very similar. In this way, each string id is actually a representation of a prefix tree (trie)!</p>
+<div align="center">
+<img src="/content/dsi_structure.jpg">
+</div>
+<p>The authors also point out that end-to-end learning of identifiers may become an interesting future work in this area.</p>
+<h2 id="co-training-of-indexing-and-retrieval">Co-training of Indexing and Retrieval</h2>
+<p>There are two possible training methods for DSI. The first one is to learn indexing from documents (memorization) and then fine-tune the model with query inputs. The other is co-train the indexing task and the retrieval task simultaneously in similar fashion to T5-style co-training [<a href="https://arxiv.org/abs/1910.10683">ref</a>]. This is because the retrieval task is actually a down-stream task of the indexing task, which is similar to the scenario in T5. The results of tuning the ratio between the two task losses is following:</p>
+<div align="center">
+<img src="/content/dsi_multitask.jpg"/>
+</div>
+<h2 id="other-settings">Other Settings</h2>
+<p>The authors have also considered many other aspects of designing this pipeline of information retrieval.</p>
+<p>First, how should we chose the indexing method? A mapping from tokens to id is the most straightforward (called Inputs2Targets). The authors propose that we can train the indexing via a Bi-directional formulation. A prefix token is prepended to allow the model to know which direction of the task is being performed in. The results of Bi-directional indexing strategy is slightly worse than the Inputs2Targets strategy.</p>
+<p>Then, how should we convert documents into sequences of embeddings? We can use the first K tokens, use a deduplicated set of tokens or use any contiguous K tokens to represent a document. However, the experiments indicate that directly using first K tokens is the best option. Deduplication and removing stopwords don&rsquo;t help much.</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/nlp/">nlp</a>
+          <a href="/tags/recommendation-system/">recommendation system</a>
+          <a href="/tags/information-retrieval/">information retrieval</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/cv-search-engine/">
+            <span class="next-text nav-default">A Search Engine for Academic Computer Vision Papers</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+      <a href="https://www.instagram.com/zelongjiang98/" class="iconfont icon-instagram" title="instagram"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -6,53 +6,62 @@
     <description>Recent content in Tags on Zelong&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kungtalon.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>deep_learning</title>
-      <link>https://kungtalon.github.io/tags/deep_learning/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      <title>information retrieval</title>
+      <link>https://kungtalon.github.io/tags/information-retrieval/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/tags/deep_learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>information_retrieval</title>
-      <link>https://kungtalon.github.io/tags/information_retrieval/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kungtalon.github.io/tags/information_retrieval/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine_learning</title>
-      <link>https://kungtalon.github.io/tags/machine_learning/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kungtalon.github.io/tags/machine_learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>my_projects</title>
-      <link>https://kungtalon.github.io/tags/my_projects/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kungtalon.github.io/tags/my_projects/</guid>
+      <guid>https://kungtalon.github.io/tags/information-retrieval/</guid>
       <description></description>
     </item>
     
     <item>
       <title>NLP</title>
       <link>https://kungtalon.github.io/tags/nlp/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kungtalon.github.io/tags/nlp/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>recommendation system</title>
+      <link>https://kungtalon.github.io/tags/recommendation-system/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/recommendation-system/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deep learning</title>
+      <link>https://kungtalon.github.io/tags/deep-learning/</link>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>https://kungtalon.github.io/tags/machine-learning/</link>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>personal projects</title>
+      <link>https://kungtalon.github.io/tags/personal-projects/</link>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/tags/personal-projects/</guid>
       <description></description>
     </item>
     
@@ -84,11 +93,11 @@
     </item>
     
     <item>
-      <title>big_data</title>
-      <link>https://kungtalon.github.io/tags/big_data/</link>
+      <title>big data</title>
+      <link>https://kungtalon.github.io/tags/big-data/</link>
       <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/tags/big_data/</guid>
+      <guid>https://kungtalon.github.io/tags/big-data/</guid>
       <description></description>
     </item>
     
@@ -102,20 +111,11 @@
     </item>
     
     <item>
-      <title>distributed_system</title>
-      <link>https://kungtalon.github.io/tags/distributed_system/</link>
+      <title>distributed system</title>
+      <link>https://kungtalon.github.io/tags/distributed-system/</link>
       <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/tags/distributed_system/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>recommendation_system</title>
-      <link>https://kungtalon.github.io/tags/recommendation_system/</link>
-      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
-      
-      <guid>https://kungtalon.github.io/tags/recommendation_system/</guid>
+      <guid>https://kungtalon.github.io/tags/distributed-system/</guid>
       <description></description>
     </item>
     

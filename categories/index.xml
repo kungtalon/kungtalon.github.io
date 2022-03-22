@@ -6,22 +6,31 @@
     <description>Recent content in Categories on Zelong&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Tue, 14 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="https://kungtalon.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>machine_learning</title>
-      <link>https://kungtalon.github.io/categories/machine_learning/</link>
-      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      <title>Recommendation System</title>
+      <link>https://kungtalon.github.io/categories/recommendation-system/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/categories/machine_learning/</guid>
+      <guid>https://kungtalon.github.io/categories/recommendation-system/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>leetcode</title>
+      <title>Personal Projects</title>
+      <link>https://kungtalon.github.io/categories/personal-projects/</link>
+      <pubDate>Tue, 14 Dec 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/categories/personal-projects/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Leetcode</title>
       <link>https://kungtalon.github.io/categories/leetcode/</link>
       <pubDate>Wed, 08 Sep 2021 00:00:00 +0000</pubDate>
       
@@ -30,20 +39,29 @@
     </item>
     
     <item>
-      <title>big_data</title>
-      <link>https://kungtalon.github.io/categories/big_data/</link>
+      <title>Principles of Big Data</title>
+      <link>https://kungtalon.github.io/categories/principles-of-big-data/</link>
       <pubDate>Tue, 27 Apr 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/categories/big_data/</guid>
+      <guid>https://kungtalon.github.io/categories/principles-of-big-data/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>recommendation_system</title>
-      <link>https://kungtalon.github.io/categories/recommendation_system/</link>
-      <pubDate>Thu, 25 Jun 2020 00:00:00 +0000</pubDate>
+      <title>Machine Learning Theory</title>
+      <link>https://kungtalon.github.io/categories/machine-learning-theory/</link>
+      <pubDate>Wed, 24 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>https://kungtalon.github.io/categories/recommendation_system/</guid>
+      <guid>https://kungtalon.github.io/categories/machine-learning-theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Paper Reading</title>
+      <link>https://kungtalon.github.io/categories/paper-reading/</link>
+      <pubDate>Wed, 04 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://kungtalon.github.io/categories/paper-reading/</guid>
       <description></description>
     </item>
     
