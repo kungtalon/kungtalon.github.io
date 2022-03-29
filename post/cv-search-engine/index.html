@@ -453,7 +453,25 @@ First, ArXiv is sensitive to typo. Even if you capitalize or forget to capitaliz
     </footer>
   </article>
         </div>
-        
+        <div id="comments-gitment"></div>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/default.min.css" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-gitment@1/gitment.browser.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      var gitment = new Gitment({
+        id: '2021-12-14 00:00:00 \x2b0000 UTC',
+        title: 'A Search Engine for Academic Computer Vision Papers',
+        link: decodeURI(location.href),
+        desc: 'We built a new search engine for papers published on ICCV and CVPR in recent years, which has been deployed on AWS and can be accessed via this \x3ca href=\x22https:\/\/taloncvsearch.com\x22\x3elink\x3c\/a\x3e. Full code is available on our Github.',
+        owner: 'kungtalon',
+        repo: 'kungtalon.github.io',
+        oauth: {
+          client_id: '5b01384ca0d53c4e81b1',
+          client_secret: 'b69c940882aaa28a275afb48461efd66006b9a22'
+        }
+      });
+      gitment.render('comments-gitment');
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/imsun/gitment">comments powered by gitment.</a></noscript>
 
   
 
