@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Deploy PyTorch Model on AWS SageMaker: For Beginners - Zelong&#39;s Blog</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Zelong Jiang" /><meta name="description" content="This is a tutorial for beginners trying to deploy their PyTorch models online and build a model inference service." /><meta name="keywords" content="Hugo, theme, even" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.68.3 with theme even" />
+
+
+<link rel="canonical" href="https://kungtalon.github.io/post/sagemaker/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.js">
+<link type="text/css" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css">
+<link type="text/javascript" src="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/contrib/auto-render.min.js">
+
+
+
+<link href="/sass/main.min.19e7df9b55a3ba87e339cf3bbee73305abf41f42aebcff104c562d48d6d0ba75.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Deploy PyTorch Model on AWS SageMaker: For Beginners" />
+<meta property="og:description" content="This is a tutorial for beginners trying to deploy their PyTorch models online and build a model inference service." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://kungtalon.github.io/post/sagemaker/" />
+<meta property="article:published_time" content="2022-04-06T00:00:00+00:00" />
+<meta property="article:modified_time" content="2022-04-06T00:00:00+00:00" />
+<meta itemprop="name" content="Deploy PyTorch Model on AWS SageMaker: For Beginners">
+<meta itemprop="description" content="This is a tutorial for beginners trying to deploy their PyTorch models online and build a model inference service.">
+<meta itemprop="datePublished" content="2022-04-06T00:00:00&#43;00:00" />
+<meta itemprop="dateModified" content="2022-04-06T00:00:00&#43;00:00" />
+<meta itemprop="wordCount" content="1800">
+
+
+
+<meta itemprop="keywords" content="machine learning,deep learning,mlops,personal projects," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Deploy PyTorch Model on AWS SageMaker: For Beginners"/>
+<meta name="twitter:description" content="This is a tutorial for beginners trying to deploy their PyTorch models online and build a model inference service."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">A Smart Onion</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/categories/">
+        <li class="mobile-menu-item">Categories</li>
+      </a>
+  </ul>
+
+  
+
+
+</nav>
+
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">A Smart Onion</a>
+</div>
+
+
+
+
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/categories/">Categories</a>
+      </li>
+  </ul>
+</nav>
+
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Deploy PyTorch Model on AWS SageMaker: For Beginners</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2022-04-06 </span>
+        <div class="post-category">
+            <a href="/categories/personal-projects/"> Personal Projects </a>
+            </div>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#prepare-the-environment">Prepare the Environment</a></li>
+        <li><a href="#prepare-the-model-and-inference-scripts">Prepare the Model and Inference Scripts</a></li>
+        <li><a href="#deploying-and-testing">Deploying and Testing</a></li>
+        <li><a href="#create-a-rest-api---lambda">Create a REST API - Lambda</a></li>
+        <li><a href="#create-a-rest-api---api-gateway">Create a REST API - API Gateway</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <p>This is a tutorial for beginners trying to deploy their PyTorch models online and build a model inference service. If you have trained a PyTorch model, BERT for example, and you are trying to develop an application out of it, then this tutorial is for you.</p>
+<p>AWS SageMaker is a machine learning platform for data scientists, machine learning engineers and MLOps engineers, where they can prepare, build, train and deploy machine learning models easily. If you are an AWS free tier user, you will be able to start free trial of SageMaker for 2 months.</p>
+<p>But think twice before deciding on SageMaker. There are many other options with lower cost for model deployment. As long as your model doesn&rsquo;t require huge RAM like deep learning models, you can deploy your model on any cloud computing service like EC2 with Flask API easily.</p>
+<h2 id="prepare-the-environment">Prepare the Environment</h2>
+<p>First, let us sign in to the console as a root user. We will use SageMaker studio, which is like a Jupyter Lab for the whole process of deployment. For the first time, you may need to create an execution role for SageMaker to access some of your S3 buckets.</p>
+<details class="admonition info"><summary class="admonition-title">S3 Buckets</summary>
+<p>It is recommended to store your data and model in S3. If you have no previously created buckets or would like to use a new one for SageMaker, please turn to S3 console and create a new bucket. You can keep all the settings default when creating a new bucket.</p>
+</details>
+<p>Then it will take minutes for SageMaker to initialize the domain. After that, we can launch the studio and enter the jupyter lab.</p>
+<div align='center'>
+<img src='/content/sagemaker/SageMakerLauncher.png'>
+</div>
+<p>It is time to create a notebook and select the image and instance to run the notebook.</p>
+<div align='center'>
+<img src='/content/sagemaker/SageMakerSelectImage.png'>
+</div>
+<p></p>
+<div align='center'>
+<img src='/content/sagemaker/SageMakerSelectInstance.png'>
+</div>
+<p>You can select any image compatible with the version of PyTorch and Python that you chose during training. Here I would go with the PyTorch 1.6, Python 3.6 and CPU-based image. Then, choose an instance which is capable of loading your entire model. From my experience, the 4GB instance is sufficient for BERT-base model.</p>
+<p>Next, we can install all the packages in notebook with the command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">!pip install transformers
+</code></pre></td></tr></table>
+</div>
+</div><p>Alternatively, if you have a requirements.txt which contains all the required packages, you can upload it to Jupyter Lab and run the command</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">!pip install -r requirements.txt
+</code></pre></td></tr></table>
+</div>
+</div><p>That&rsquo;s all about setting up the environment in SageMaker.</p>
+<h2 id="prepare-the-model-and-inference-scripts">Prepare the Model and Inference Scripts</h2>
+<p>This step can be done completely on your PC or on the SageMaker Notebook.</p>
+<p>After training your PyTorch model, you probably have stored your <code>state_dict</code> in a pth file. Rename the file to <code>model.pth</code>.</p>
+<p>The next part may be the most time consuming. You will need to implement a script named <code>inference.py</code> which tells the SageMaker how to load your model, how to parse input data and how to make predictions. Here is an example from <a href="https://sagemaker-examples.readthedocs.io/en/latest/frameworks/pytorch/get_started_mnist_deploy.html">official documentation</a>.</p>
+<p>You will need to define the following functions:</p>
+<ul>
+<li>model_fn: initialize your model object and load your checkpoint</li>
+<li>input_fn: parse input data from your HTTP request</li>
+<li>predict_fn: feed the input to model and get the predictions</li>
+<li>output_fn: convert the predictions to json</li>
+</ul>
+<p>For <code>model_fn</code>, it is called only once when the inference server gets started. It should look like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">model_fn</span><span class="p">(</span><span class="n">model_dir</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">BertClassifier</span><span class="p">(</span><span class="n">bertname</span><span class="p">,</span> <span class="n">num_classes</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span> <span class="c1"># initialization</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">model_dir</span><span class="p">,</span> <span class="s1">&#39;model.pth&#39;</span><span class="p">),</span> <span class="s1">&#39;rb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>  <span class="c1"># load state dict</span>
+    <span class="k">return</span> <span class="n">model</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here the BertClassifier is a custom <code>nn.Module</code> class defined myself. Don&rsquo;t forget to include such classes and import any related packages in your <code>inference.py</code>.</p>
+<p>The implementation of <code>input_fn</code> basically depends on how you encode your data. Take BERT for example. If you decide to send raw text to the SageMaker for inference, you will need to implement the whole preprocessing pipeline including tokenizing, padding in this function. However, if you do the feature preprocessing before sending HTTP request, you will only need to convert the json or string to tensors.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">input_fn</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="n">request_content_type</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">request_content_type</span> <span class="o">==</span> <span class="s2">&#34;application/json&#34;</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">request_body</span><span class="p">)[</span><span class="s1">&#39;inputs&#39;</span><span class="p">]</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">LongTensor</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&#34;Invalid content type!&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The returned value of <code>input_fn</code> and <code>model_fn</code> will be directly fed into the <code>predict_fn</code>. The <code>predict_fn</code> is quite simple. Almost the same as what we did during training:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">predict_fn</span><span class="p">(</span><span class="n">input_data</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+    <span class="k">with</span> <span class="n">torch</span><span class="o">.</span><span class="n">no_grad</span><span class="p">():</span>
+        <span class="n">prediction</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">input_data</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">prediction</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>The <code>output_fn</code> converts the output tensor back to json or other content type.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">output_fn</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">response_content_type</span><span class="p">):</span>
+    <span class="k">assert</span> <span class="n">response_content_type</span> <span class="o">==</span> <span class="s1">&#39;application/json&#39;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">predictions</span><span class="o">.</span><span class="n">cpu</span><span class="p">()</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>After finishing the script, we move the script into a folder named <code>code</code> along with a <code>requirements.txt</code> listing all dependencies. Then we can pack the <code>code/</code> folder and the <code>model.pth</code> into a tar.gz file.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">tar -cvzf bert.tar.gz model.pth code/
+</code></pre></td></tr></table>
+</div>
+</div><p>Then we can upload this file to SageMaker studio or S3 bucket.</p>
+<h2 id="deploying-and-testing">Deploying and Testing</h2>
+<p>Now in the notebook, we create a SageMaker PyTorchModel object to load the model and the script.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sagemaker</span> <span class="kn">import</span> <span class="n">get_execution_role</span>
+<span class="kn">from</span> <span class="nn">sagemaker.pytorch.model</span> <span class="kn">import</span> <span class="n">PyTorchModel</span>
+
+<span class="n">role</span> <span class="o">=</span> <span class="n">get_execution_role</span><span class="p">()</span>
+
+<span class="n">pytorch_model</span> <span class="o">=</span> <span class="n">PyTorchModel</span><span class="p">(</span><span class="n">model_data</span><span class="o">=</span><span class="s1">&#39;bert.tar.gz&#39;</span><span class="p">,</span> 
+                             <span class="n">role</span><span class="o">=</span><span class="n">role</span><span class="p">,</span>
+                             <span class="n">entry_point</span><span class="o">=</span><span class="s1">&#39;inference.py&#39;</span><span class="p">,</span>
+                             <span class="n">framework_version</span><span class="o">=</span><span class="s1">&#39;1.6.0&#39;</span><span class="p">,</span>
+                             <span class="n">py_version</span><span class="o">=</span><span class="s2">&#34;py36&#34;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>And then deploy the model with one single line of code.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">predictor</span> <span class="o">=</span> <span class="n">pytorch_model</span><span class="o">.</span><span class="n">deploy</span><span class="p">(</span><span class="n">instance_type</span><span class="o">=</span><span class="s1">&#39;ml.c5.large&#39;</span><span class="p">,</span> <span class="n">initial_instance_count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>As soon as this is done, we can try to invoke the SageMaker endpoint within the notebook:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">boto3</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;sagemaker-runtime&#39;</span><span class="p">)</span>
+<span class="n">endpoint_name</span> <span class="o">=</span> <span class="n">predictor</span><span class="o">.</span><span class="n">endpoint_name</span>
+<span class="n">content_type</span> <span class="o">=</span> <span class="s1">&#39;application/json&#39;</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">generate_test_requests</span><span class="p">(</span><span class="s1">&#39;This is a test case.&#39;</span><span class="p">)</span>
+
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">invoke_endpoint</span><span class="p">(</span>
+    <span class="n">EndpointName</span><span class="o">=</span><span class="n">endpoint_name</span><span class="p">,</span>
+    <span class="n">ContentType</span><span class="o">=</span><span class="n">content_type</span><span class="p">,</span>
+    <span class="n">Body</span><span class="o">=</span><span class="n">payload</span>
+<span class="p">)</span>
+
+<span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>If this returns expected results, then congratulations, you succeeded in deploying your model on SageMaker. If not, we may need to find the error messages and fix some bugs.</p>
+<p>All the logs during deployment and inference can be found in AWS CloudWatch.</p>
+<div align='center'>
+<img src='/content/sagemaker/CloudWatchLogs.png'>
+</div>
+<p>Click the log group corresponding to your endpoint name. Remember you got the <code>endpoint_name</code> by <code>predictor.endpoint_name</code> in the last code block.</p>
+<div align='center'>
+<img src='/content/sagemaker/CloudWatchError.png'>
+</div>
+<p>You can see clearly from the logs that I made a mistake when I loaded the state dict from the <code>model.pth</code>, which is because this checkpoint is saved from a model on <code>torch.device('cuda')</code> while loaded on <code>torch.device('cpu')</code>. It can be fixed by adding <code>map_location</code> to the <code>torch.load</code> function.</p>
+<p>After fixing the code, we need to re-pack the tar.gz file and re-deploy the PyTorchModel. We repeat this util the response gives correct predictions. (If anyone knows how to make this debugging process easier, please let me know)</p>
+<p>Finally, it is recommended to store your tarball in S3 buckets instead of leaving it in SageMaker Studio.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="n">s3</span> <span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">resource</span><span class="p">(</span><span class="s1">&#39;s3&#39;</span><span class="p">)</span>
+<span class="n">s3</span><span class="o">.</span><span class="n">meta</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">upload_file</span><span class="p">(</span><span class="s1">&#39;bert.tar.gz&#39;</span><span class="p">,</span> <span class="s1">&#39;YOUR_BUCKET_NAME&#39;</span><span class="p">,</span> <span class="s1">&#39;bert.tar.gz&#39;</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="create-a-rest-api---lambda">Create a REST API - Lambda</h2>
+<p>Now we can use our model to make predictions by calling the SageMaker endpoint on AWS. But what if we would like to call our model from outside AWS? It is a good practice to encapsulate our endpoint with a REST API, which can be requested anywhere.</p>
+<p>Here we are going to build the API with the AWS Lambda and AWS API Gateway. I will follow the <a href="https://aws.amazon.com/blogs/machine-learning/call-an-amazon-sagemaker-model-endpoint-using-amazon-api-gateway-and-aws-lambda/">AWS Documentation</a>, which includes the use of Lambda. It is said that API Gateway can directly forward the HTTP requests to SageMaker endpoint without the Lambda service. You can try it if interested.</p>
+<div align='center'>
+<img src='/content/sagemaker/SageMakerAPI.jpg'>
+</div>
+<p>The API Gateway receives HTTP requests from external apps and forwards them to different services. The Lambda is a serverless computing service, which is able to run codes to interact with different AWS services.</p>
+<p>After logging into the console of Lambda, we need to create a new lambda function. Pay attention to choosing python as the runtime language.</p>
+<div align='center'>
+<img src='/content/sagemaker/LambdaCreateFunction.png'>
+</div>
+<p>One problem here is that we need to specify the IAM role to enable our Lambda access the SageMaker endpoint. Choose one role which includes the following policy. If you can not find any existing SageMaker related roles, you may need to create one yourself by clicking the link to IAM Console. Don&rsquo;t create a new role with basic Lambda permissions.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+    <span class="nt">&#34;Version&#34;</span><span class="p">:</span> <span class="s2">&#34;2012-10-17&#34;</span><span class="p">,</span>
+    <span class="nt">&#34;Statement&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="nt">&#34;Sid&#34;</span><span class="p">:</span> <span class="s2">&#34;VisualEditor0&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Effect&#34;</span><span class="p">:</span> <span class="s2">&#34;Allow&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Action&#34;</span><span class="p">:</span> <span class="s2">&#34;sagemaker:InvokeEndpoint&#34;</span><span class="p">,</span>
+            <span class="nt">&#34;Resource&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span>
+        <span class="p">}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><details class="admonition info"><summary class="admonition-title">IAM Role Creation</summary>
+<p>First, choose the use case of Lambda.
+<img src="/content/sagemaker/IAM1.png" alt=""></p>
+<p>Then, before creating roles, we need to create corresponding policy:</p>
+<p><img src="/content/sagemaker/IAM2.png" alt=""></p>
+<p>Copy and paste the policy that allows Lambda to invoke SageMaker endpoints.</p>
+<p><img src="/content/sagemaker/IAM3.png" alt=""></p>
+<p>Good job! Next we just need to create a new role with this new policy.</p>
+<p><img src="/content/sagemaker/IAM4.png" alt=""></p>
+<p>Now we get a valid IAM role for our task. This is the role you should choose when creating a new Lambda function.</p>
+</details>
+<p>On Lambda, we only need to use the code similar to which we used for testing:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">io</span>
+<span class="kn">import</span> <span class="nn">boto3</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="n">ENDPOINT_NAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;ENDPOINT_NAME&#39;</span><span class="p">]</span>
+<span class="n">runtime</span><span class="o">=</span> <span class="n">boto3</span><span class="o">.</span><span class="n">client</span><span class="p">(</span><span class="s1">&#39;runtime.sagemaker&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">lambda_handler</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">context</span><span class="p">):</span>
+
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">event</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">])</span>
+    
+    <span class="n">response</span> <span class="o">=</span> <span class="n">runtime</span><span class="o">.</span><span class="n">invoke_endpoint</span><span class="p">(</span><span class="n">EndpointName</span><span class="o">=</span><span class="n">ENDPOINT_NAME</span><span class="p">,</span>
+                                       <span class="n">ContentType</span><span class="o">=</span><span class="s1">&#39;application/json&#39;</span><span class="p">,</span>
+                                       <span class="n">Body</span><span class="o">=</span><span class="n">payload</span><span class="p">)</span>
+    
+    <span class="n">res</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;Body&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">res</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Here we use an environment variable <code>ENDPOINT_NAME</code>. This is defined in Configuration -&gt; Environment variables. We use the environment variable because we won&rsquo;t need to change the code when switching to a new SageMaker endpoint.</p>
+<div align='center'>
+<img src='/content/sagemaker/LambdaEnviron.png'>
+</div>
+<p>You can do a lot of things inside the lambda function, such as numpy array manipulation, putting the response to DynamoDB or send SNS to notify yourself whenever an abnormal behavior occurs.</p>
+<h2 id="create-a-rest-api---api-gateway">Create a REST API - API Gateway</h2>
+<p>Typically, when handling HTTP requests, we would route the request to different endpoints according to the method (GET/POST/PUT/&hellip;) and headers. Because we only accept request with input data, the method is expected to be <code>POST</code>.</p>
+<p>Enter the console of API Gateway and click &ldquo;create API&rdquo; and choose &ldquo;REST API&rdquo;.</p>
+<div align='center'>
+<img src='/content/sagemaker/CreateAPI.png'>
+</div>
+<p>After getting our new API, click Actions -&gt; Create Method -&gt; choose &ldquo;POST&rdquo;.</p>
+<div align='center'>
+<img src='/content/sagemaker/SetupAPI.png'>
+</div>
+<p>Set up the &ldquo;POST&rdquo; method to invoke your previously implemented Lambda function. Then you can test the method with your test data as you like.</p>
+<p>Now, select your &ldquo;POST&rdquo; method and click Actions -&gt; Deploy API -&gt; New Stage, to deploy your API. After this, you will be able to find the URL of the API in Stages</p>
+<div align='center'>
+<img src='/content/sagemaker/FinalURL.png'>
+</div>
+<p>Finally, we can use the <code>requests</code> package to send requests to our REST API. An example is like:</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">requests</span>
+
+<span class="n">YOUR_API_URL</span> <span class="o">=</span> <span class="s2">&#34;https://*******.execute-api.us-east-2.amazonaws.com/******&#34;</span>
+
+<span class="n">body</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span>
+            <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">13</span><span class="p">,</span> <span class="mi">14</span><span class="p">]</span>
+        <span class="p">]</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">YOUR_API_URL</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">body</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>Of course, you can choose any other language to send HTTP requests to the API.</p>
+<p>In the end, AWS is such a powerful platform and there is much to explore in SageMaker and Lambda. I hope my experience in building this API will help you learn better how these services work.</p>
+
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/machine-learning/">machine learning</a>
+          <a href="/tags/deep-learning/">deep learning</a>
+          <a href="/tags/mlops/">mlops</a>
+          <a href="/tags/personal-projects/">personal projects</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/post/google-dsi/">
+            <span class="next-text nav-default">Google Research: Differentiable Search Index</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="gitalk-container"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+  var gitalk = new Gitalk({
+    id: '2022-04-06 00:00:00 \x2b0000 UTC',
+    title: 'Deploy PyTorch Model on AWS SageMaker: For Beginners',
+    clientID: '5b01384ca0d53c4e81b1',
+    clientSecret: 'b69c940882aaa28a275afb48461efd66006b9a22',
+    repo: 'kungtalon.github.io',
+    owner: 'kungtalon',
+    admin: ['kungtalon'],
+    body: decodeURI(location.href)
+  });
+  gitalk.render('gitalk-container');
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://github.com/gitalk/gitalk">comments powered by
+    gitalk.</a></noscript>
+
+
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:zelong@umich.edu" class="iconfont icon-email" title="email"></a>
+      <a href="https://www.linkedin.com/in/zelong-zane-jiang-49b388168/" class="iconfont icon-linkedin" title="linkedin"></a>
+      <a href="https://github.com/kungtalon" class="iconfont icon-github" title="github"></a>
+      <a href="https://www.zhihu.com/people/yin-mu-81-22" class="iconfont icon-zhihu" title="zhihu"></a>
+  <a href="https://kungtalon.github.io/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>Zelong Jiang</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+  <script type="text/javascript">
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$','$'], ['\\(','\\)']],
+        }
+    };
+  </script>
+  <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.0.5/es5/tex-mml-chtml.js" integrity="sha256-HGLuEfFcsUJGhvB8cQ8nr0gai9EucOOaIxFw7qxmd+w=" crossorigin="anonymous"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>
