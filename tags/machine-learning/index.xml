@@ -17,7 +17,7 @@
       <pubDate>Wed, 20 Jul 2022 00:00:00 +0000</pubDate>
       
       <guid>https://kungtalon.github.io/post/multi-domain-model-in-ads/</guid>
-      <description>For ML-powered advertisement systems, When building a big model to serve all the different businesses and channels, it is really important to make your model aware of the distinction between different &lt;code&gt;domains&lt;/code&gt;. Here we present two papers from Alibaba which solve the problem of multi-domain learning in the field of online ads.</description>
+      <description>For ML-powered advertisement systems, when building a big model to serve all the different businesses and channels, it is really important to make your model aware of the distinction between different &lt;strong&gt;domains&lt;/strong&gt;. Here we present two papers from Alibaba which solve the problem of multi-domain learning in the field of online ads.</description>
     </item>
     
     <item>
