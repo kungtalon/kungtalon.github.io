@@ -131,20 +131,20 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Google Research: Differentiable Search Index</h1>
+  
+  <header class="post-header">
+    <h1 class="post-title">Google Research: Differentiable Search Index</h1>
 
-      <div class="post-meta">
-        <span class="post-time"> 2022-03-22 </span>
-        <div class="post-category">
-            <a href="/categories/recommendation-system/"> Recommendation System </a>
-            </div>
-        
-      </div>
-    </header>
+    <div class="post-meta">
+      <span class="post-time"> 2022-03-22 </span>
+      <div class="post-category">
+        <a href="/categories/recommendation-system/"> Recommendation System </a>
+        </div>
+      
+    </div>
+  </header>
 
-    <div class="post-toc" id="post-toc">
+  <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
@@ -162,8 +162,8 @@
 </nav>
   </div>
 </div>
-    <div class="post-content">
-      <p><img src="/content/google_dsi.jpg" alt=""></p>
+  <div class="post-content">
+    <p><img src="/content/google_dsi.jpg" alt=""></p>
 <h2 id="introduction">Introduction</h2>
 <p>Information Retrieval (IR) is an important technique that has laid the foundation of development of search engines and recommendation systems. For recommendation systems, it is crucial to retrieve a small pool of candidates from the vast amount of data before predicting the CTR/CVR of each item.</p>
 <p>Considering the most popular indexing methods, such as BM25 and Embedding-based Retrieval, the process is to convert the documents into vector space and during retrieval we try to find the document that best <u>matches</u> the query. Therefore, the complexity would always increase with the size of documents. Is there a method that we can store all information about the documents within one single model and map the query directly to the relevant documents with this model? This is the idea of one of Google&rsquo;s recent papers: Transformer Memory as a Differentiable Search Index (DSI). <a href="https://arxiv.org/abs/2202.06991">Arxiv Link</a></p>
@@ -187,29 +187,29 @@
 <p>First, how should we chose the indexing method? A mapping from tokens to id is the most straightforward (called Inputs2Targets). The authors propose that we can train the indexing via a Bi-directional formulation. A prefix token is prepended to allow the model to know which direction of the task is being performed in. The results of Bi-directional indexing strategy is slightly worse than the Inputs2Targets strategy.</p>
 <p>Then, how should we convert documents into sequences of embeddings? We can use the first K tokens, use a deduplicated set of tokens or use any contiguous K tokens to represent a document. However, the experiments indicate that directly using first K tokens is the best option. Deduplication and removing stopwords don&rsquo;t help much.</p>
 
-    </div>
+  </div>
 
-    
+  
 <footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/nlp/">nlp</a>
-          <a href="/tags/recommendation-system/">recommendation system</a>
-          <a href="/tags/information-retrieval/">information retrieval</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/sagemaker/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">Deploy PyTorch Model on AWS SageMaker: For Beginners</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        <a class="next" href="/post/cv-search-engine/">
-            <span class="next-text nav-default">A Search Engine for Academic Computer Vision Papers</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
+    <div class="post-tags">
+      <a href="/tags/nlp/">nlp</a>
+      <a href="/tags/recommendation-system/">recommendation system</a>
+      <a href="/tags/information-retrieval/">information retrieval</a>
+      </div>
+    <nav class="post-nav">
+      <a class="prev" href="/post/sagemaker/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Deploy PyTorch Model on AWS SageMaker: For Beginners</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+      <a class="next" href="/post/cv-search-engine/">
+        <span class="next-text nav-default">A Search Engine for Academic Computer Vision Papers</span>
+        <span class="next-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav>
+  </footer>
+</article>
         </div>
         <div id="gitalk-container"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">

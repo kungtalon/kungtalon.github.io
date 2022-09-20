@@ -131,20 +131,20 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">Multi-domain Modeling in Ads</h1>
+  
+  <header class="post-header">
+    <h1 class="post-title">Multi-domain Modeling in Ads</h1>
 
-      <div class="post-meta">
-        <span class="post-time"> 2022-07-20 </span>
-        <div class="post-category">
-            <a href="/categories/paper-reading/"> Paper Reading </a>
-            </div>
-        
-      </div>
-    </header>
+    <div class="post-meta">
+      <span class="post-time"> 2022-07-20 </span>
+      <div class="post-category">
+        <a href="/categories/paper-reading/"> Paper Reading </a>
+        </div>
+      
+    </div>
+  </header>
 
-    <div class="post-toc" id="post-toc">
+  <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
@@ -171,8 +171,8 @@
 </nav>
   </div>
 </div>
-    <div class="post-content">
-      <h2 id="background">Background</h2>
+  <div class="post-content">
+    <h2 id="background">Background</h2>
 <p>In the field of recommendation system and digital ads, more and more companies are seeking to use a <code>big model</code> to serve all different businesses and channels (referred to as <code>domains</code>). This will not only reduce the cost of maintaining dozens of models, one for each domain, but also help enhance the ability of generalization of the prediction model by merging the enormous data into one single pool. However, the distributions of user features from these domains differ a lot. For example, the customers from a fashion e-commerce website and a mountain bike website may have few interests in common. To tackle this, we have to force the model to see the pattern behind each domain by explicitly feeding the domain identifiers into the model, such as the business id or the url of a website. But how do we make full use of this domain-related feature?</p>
 <p>Note that the concept of multi-domain learning is totally different from domain adaptation, where the knowledge is transferred one-way from the source domain to the target domain.</p>
 <h2 id="star-topology-adaptive-recommender-star">Star Topology Adaptive Recommender (STAR)</h2>
@@ -231,26 +231,26 @@ $$</p>
 <p>$$\lambda^{l}=\begin{cases}  0 &amp; r^{l} \in\left[r_{\min }, r_{\max }\right] \\ \hat{\lambda} \cdot\left|r^{l}-r\right| \quad &amp; r^{l} \notin\left[r_{\min }, r_{\max }\right] \ \end{cases}$$</p>
 <p>where $\hat \lambda$ is initialized by 0.01 and gradually increase over training step, thus the model pays less attention on sparsity loss term during early training and focuses more on adjusting $\boldsymbol \pi ^l$.</p>
 
-    </div>
+  </div>
 
-    
+  
 <footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/machine-learning/">machine learning</a>
-          <a href="/tags/deep-learning/">deep learning</a>
-          <a href="/tags/recommendation-system/">recommendation system</a>
-          <a href="/tags/ads-system/">ads system</a>
-          </div>
-      <nav class="post-nav">
-        
-        <a class="next" href="/post/sagemaker/">
-            <span class="next-text nav-default">Deploy PyTorch Model on AWS SageMaker: For Beginners</span>
-            <span class="next-text nav-mobile">Next</span>
-            <i class="iconfont icon-right"></i>
-          </a>
-      </nav>
-    </footer>
-  </article>
+    <div class="post-tags">
+      <a href="/tags/machine-learning/">machine learning</a>
+      <a href="/tags/deep-learning/">deep learning</a>
+      <a href="/tags/recommendation-system/">recommendation system</a>
+      <a href="/tags/ads-system/">ads system</a>
+      </div>
+    <nav class="post-nav">
+      
+      <a class="next" href="/post/sagemaker/">
+        <span class="next-text nav-default">Deploy PyTorch Model on AWS SageMaker: For Beginners</span>
+        <span class="next-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    </nav>
+  </footer>
+</article>
         </div>
         <div id="gitalk-container"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">

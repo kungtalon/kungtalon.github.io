@@ -131,20 +131,20 @@
       <div class="content-wrapper">
         <div id="content" class="content">
           <article class="post">
-    
-    <header class="post-header">
-      <h1 class="post-title">A Simple Guide to Subgradient</h1>
+  
+  <header class="post-header">
+    <h1 class="post-title">A Simple Guide to Subgradient</h1>
 
-      <div class="post-meta">
-        <span class="post-time"> 2019-02-08 </span>
-        <div class="post-category">
-            <a href="/categories/machine-learning-theory/"> Machine Learning Theory </a>
-            </div>
-        
-      </div>
-    </header>
+    <div class="post-meta">
+      <span class="post-time"> 2019-02-08 </span>
+      <div class="post-category">
+        <a href="/categories/machine-learning-theory/"> Machine Learning Theory </a>
+        </div>
+      
+    </div>
+  </header>
 
-    <div class="post-toc" id="post-toc">
+  <div class="post-toc" id="post-toc">
   <h2 class="post-toc-title">Contents</h2>
   <div class="post-toc-content always-active">
     <nav id="TableOfContents">
@@ -160,8 +160,8 @@
 </nav>
   </div>
 </div>
-    <div class="post-content">
-      <h2 id="definition">Definition</h2>
+  <div class="post-content">
+    <h2 id="definition">Definition</h2>
 <p>If $f(x)$ is a convex function, then the set $\partial f = \{v | f(x) \ge f(x _0) + v^T (x - x _0)\}$ is called the sub-gradient of $f(x)$ at the point of $x _0$. Here $v$ should be limited to a small neighborhood of $x _0$. Note that $v^T (x- x _0)$ can be a generalized inner product in some Banach space other than Euclidean space.</p>
 <p>It is apparent that, if $f(x)$ is differentiable at $x _0$, then by definition $$f(x) - f(x _0) = f&rsquo;(x _0) ^T (x - x _0) + o(\| x - x _0 \|) \ge v^T (x - x_0)$$. In this case, we can say that the sub-gradient of $f(x)$ at $x _0$ is exactly the gradient $f&rsquo;(x _0)$. For non-differentiable points, the sub-gradient should be a set.</p>
 <h2 id="geometric-explanation">Geometric Explanation</h2>
@@ -181,24 +181,24 @@
 <p>For differentiable functions, a necessary condition for an extremum is that the slope of the tangent line is 0 (Fermat&rsquo;s Theorem). So considering the geometric meaning of subgradient, this theorem indicates that there exists such a horizontal line that it is under the curve and intersect at $x _0$.</p>
 <p>Similarly, we can modify the KKT condition from $\nabla \mathcal L (x, \lambda) = 0$ to $0 \in \partial \mathcal L (x, \lambda)$. Therefore, subgradient becomes really useful when it comes to solving the optimization problems of some non-differentiable target functions like $\ell _1$ norm.</p>
 
-    </div>
+  </div>
 
-    
+  
 <footer class="post-footer">
-      <div class="post-tags">
-          <a href="/tags/machine-learning/">machine learning</a>
-          <a href="/tags/optimization/">optimization</a>
-          </div>
-      <nav class="post-nav">
-        <a class="prev" href="/post/logic-reasoning/">
-            <i class="iconfont icon-left"></i>
-            <span class="prev-text nav-default">A Survey on Rule Learning in Text Mining</span>
-            <span class="prev-text nav-mobile">Prev</span>
-          </a>
-        
-      </nav>
-    </footer>
-  </article>
+    <div class="post-tags">
+      <a href="/tags/machine-learning/">machine learning</a>
+      <a href="/tags/optimization/">optimization</a>
+      </div>
+    <nav class="post-nav">
+      <a class="prev" href="/post/logic-reasoning/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">A Survey on Rule Learning in Text Mining</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+      
+    </nav>
+  </footer>
+</article>
         </div>
         <div id="gitalk-container"></div>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css" crossorigin="anonymous">
